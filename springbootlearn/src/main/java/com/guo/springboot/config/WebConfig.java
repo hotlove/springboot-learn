@@ -13,6 +13,9 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,5 +82,20 @@ public class WebConfig {
     @Bean
     public ServletListenerRegistrationBean<ListenerTest> servletListenerRegistrationBean() {
         return new ServletListenerRegistrationBean<ListenerTest>(new ListenerTest());
+    }
+
+    /**
+     * 粗粒度的 跨域处理 还有一种是细粒度的在requestmapping 注解增加 @CrossOrigin(origins="xx")
+     * @return
+     */
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/hello/**")
+                        .allowedOrigins("http://localhost:8080"); // 允许8080端口访问
+            }
+        };
     }
 }
