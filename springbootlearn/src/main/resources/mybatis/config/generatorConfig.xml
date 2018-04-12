@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+	<properties resource="generatorConfig.properties"></properties>
+
+	<classPathEntry location="${jdbc.driverLocation}" />
+
+	<context id="context1">
+
+		<!--<plugin type="com.badu.bdsaas.tools.mbg.plugins.SerializablePlugin" />-->
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver " connectionURL="${jdbc.connectionURL}"
+			userId="${jdbc.username}" password="${jdbc.password}" />
+
+		<javaModelGenerator targetPackage="com.guo.springboot.domain" targetProject="src/main/java"></javaModelGenerator>
+		<sqlMapGenerator targetPackage="com.guo.springboot.dao" targetProject="src/main/resources/mybatis/mapper" />
+		<javaClientGenerator targetPackage="com.guo.springboot.dao" targetProject="/src/main/java" type="XMLMAPPER" />
+
+        
+        
+        <table tableName="co_work_task_other_read" domainObjectName="CoWorkTaskOtherRead" alias="CTOR">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+	</context>
+</generatorConfiguration>
