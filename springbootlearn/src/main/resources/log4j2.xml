@@ -11,6 +11,7 @@
     </appenders>
     <loggers>
         <logger name="org.springframework.jdbc.core.JdbcTemplate" level="debug"/>
+        <logger name="com.guo.springboot.dao.*" level="DEBUG"/>
         <logger name="com.light.springboot" level="debug" />
         <root level="info">
             <appenderref ref="CONSOLE" />

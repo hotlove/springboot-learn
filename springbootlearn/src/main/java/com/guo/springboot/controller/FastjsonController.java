@@ -17,9 +17,8 @@ public class FastjsonController {
         Profile profile = new Profile();
 
         profile.setId(12);
-        profile.setUserName("test");
+        profile.setUsername("test");
         profile.setPassword("test");
-        profile.setBirthday(new Date());
 
         return profile;
     }

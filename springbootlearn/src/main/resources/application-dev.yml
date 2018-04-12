@@ -5,6 +5,11 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/springboot?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/spring-boot?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     username: root
     password: root
+
+# mybatis 配置扫描xml文件 domain对象
+mybatis:
+  type-aliases-package: com.guo.springboot.domain
+  mapper-locations: classpath:mybatis/mapper/com/guo/springboot/dao/*.xml

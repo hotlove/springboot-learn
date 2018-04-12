@@ -19,7 +19,7 @@
 
         
         
-        <table tableName="co_work_task_other_read" domainObjectName="CoWorkTaskOtherRead" alias="CTOR">
+        <table tableName="profile" domainObjectName="Profile" alias="PP">
 			<property name="useActualColumnNames" value="false" />
 		</table>
 	</context>
