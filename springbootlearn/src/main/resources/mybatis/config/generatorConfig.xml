@@ -10,12 +10,12 @@
 
 		<!--<plugin type="com.badu.bdsaas.tools.mbg.plugins.SerializablePlugin" />-->
 
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver " connectionURL="${jdbc.connectionURL}"
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="${jdbc.connectionURL}"
 			userId="${jdbc.username}" password="${jdbc.password}" />
 
 		<javaModelGenerator targetPackage="com.guo.springboot.domain" targetProject="src/main/java"></javaModelGenerator>
 		<sqlMapGenerator targetPackage="com.guo.springboot.dao" targetProject="src/main/resources/mybatis/mapper" />
-		<javaClientGenerator targetPackage="com.guo.springboot.dao" targetProject="/src/main/java" type="XMLMAPPER" />
+		<javaClientGenerator targetPackage="com.guo.springboot.dao" targetProject="src/main/java" type="XMLMAPPER" />
 
         
         
