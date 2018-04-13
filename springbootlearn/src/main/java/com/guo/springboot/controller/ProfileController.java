@@ -19,7 +19,7 @@ public class ProfileController {
     @ResponseBody
     public String insertProfile() {
         Profile profile = new Profile();
-        profile.setId(1);
+        profile.setId(2);
         profile.setPassword("12345");
         profile.setUsername("123");
         profile.setAddress("fasdfasdf");

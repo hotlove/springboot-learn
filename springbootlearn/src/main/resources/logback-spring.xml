@@ -14,7 +14,8 @@
                 <pattern>${PATTERN}</pattern>
             </encoder>
         </appender>
-        <logger name="com.light.springboot" level="debug" />
+        <logger name="com.guo.springboot.*.*" level="debug" />
+        <logger name="com.guo.springboot.dao.ProfileMapper" level="DEBUG" />
         <root level="info">
             <appender-ref ref="CONSOLE" />
         </root>
