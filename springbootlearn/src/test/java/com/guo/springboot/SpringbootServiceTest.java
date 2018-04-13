@@ -17,16 +17,20 @@ public class SpringbootServiceTest {
     private ProfileService profileService;
 
     @Test
-    public void testInsertProfile() {
+    public void testInsertProfile(){
 
         Profile profile = new Profile();
-        profile.setId(1);
+        profile.setId(8);
         profile.setMobile("13905607377");
         profile.setPassword("12345");
         profile.setUsername("123");
         profile.setAddress("fasdfasdf");
 
-        profileService.insertProfile(profile);
+        try {
+            profileService.insertProfile(profile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

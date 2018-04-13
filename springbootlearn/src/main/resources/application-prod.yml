@@ -9,6 +9,24 @@ spring:
     username: root
     password: root
 
+# 修改数据源 使用连接池
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    initial-size: 5
+    min-idle: 5
+    max-active: 20
+    max-wait: 60000
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    validation-query: SELECT 1 FROM DUAL
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+    pool-prepared-statements: true
+    max-pool-prepared-statement-per-connection-size: 20
+    filters: stat,wall,log4j
+
 # mybatis 配置扫描xml文件 domain对象
 mybatis:
   type-aliases-package: com.guo.springboot.domain

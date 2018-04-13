@@ -17,7 +17,7 @@ public class ProfileController {
 
     @RequestMapping(value = "/add")
     @ResponseBody
-    public String insertProfile() {
+    public String insertProfile() throws Exception {
         Profile profile = new Profile();
         profile.setId(2);
         profile.setPassword("12345");
