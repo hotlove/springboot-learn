@@ -38,7 +38,7 @@ public class SpringbootApplicationWar extends SpringBootServletInitializer {
         servletContext.addListener(new ListenerTest());
     }
 
-    public static void main(String[] args) {
-        SpringApplication.run(SpringbootApplicationWar.class, args);
-    }
+//    public static void main(String[] args) {
+//        SpringApplication.run(SpringbootApplicationWar.class, args);
+//    }
 }

@@ -1,0 +1,28 @@
+public static void main(String[] args) throws IOException {
+        String ak = "F0s3jrT0qOMUGRFD8aqNacD9RbjOBg4u";
+        String path126 = "http://ip.ws.126.net/ipquery?ip=36.5.132.242";
+        String taobaoPath = "http://ip.taobao.com/service/getIpInfo.php?ip=36.5.132.242";
+        String baiduPath = "http://api.map.baidu.com/location/ip?ip=36.5.132.241&coor=gcj02&ak="+ak;
+        String youdaoPath = "http://www.youdao.com/smartresult-xml/search.s?type=ip&q=36.5.132.241";
+        String path = "http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=36.5.132.241";
+        HttpGet httpPost = new HttpGet(path126);
+        CloseableHttpResponse response = HttpConnectionManager.getInstance().getHttpClient().execute(httpPost, HttpClientContext.create());
+//        System.out.println(EntityUtils.toString(response.getEntity(), "utf-8"));
+        byte[] result = null;
+        try {
+            result = EntityUtils.toByteArray(response.getEntity());
+        } finally {
+            if (response != null) {
+                response.close();
+            }
+        }
+        String jsonString = new String(result, "gbk");
+        String dataString = jsonString.substring(jsonString.indexOf('{'));
+        System.out.println(dataString);
+        Map<String, Object> jsonMap = JSON.parseObject(dataString, Map.class);
+
+//        ObjectMapper mapper = new ObjectMapper();
+//        Map<String,Object> map=mapper.readValue(dataString, Map.class);
+
+        System.out.println(jsonMap.get("city"));
+    }
