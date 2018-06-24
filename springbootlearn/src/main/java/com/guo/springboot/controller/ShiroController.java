@@ -8,6 +8,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,9 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 public class ShiroController {
 
     @RequestMapping("/login")
+    @ResponseBody
     public String shiroLogin(HttpServletRequest request, String n, String p) {
-        // shiroLoginFailure:就是shiro异常类的全类名.
-        String exception = (String) request.getAttribute("shiroLoginFailure");
 
         Subject subject = SecurityUtils.getSubject();
 
@@ -35,6 +35,12 @@ public class ShiroController {
             return "failure";
         }
 
+        return "hello";
+    }
+
+    @RequestMapping("/index")
+    @ResponseBody
+    public String shiroIndex() {
         return "hello";
     }
 }

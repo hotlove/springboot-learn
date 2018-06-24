@@ -35,7 +35,7 @@ public class MyRealm extends AuthenticatingRealm {
 
             Profile profile = profileList.get(0);
 
-            SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(userName, profile.getPassword(), getName() );
+            SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(userName, authenticationToken.getCredentials(), getName() );
             return simpleAuthenticationInfo;
         }
         return null;
