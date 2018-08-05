@@ -113,6 +113,12 @@
             <version>0.9.0</version>
         </dependency>
 
+        <!-- html模板 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
         <!-- 测试相关 -->
         <!-- spring 单元测试 -->
         <dependency>

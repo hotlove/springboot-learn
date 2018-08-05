@@ -4,6 +4,8 @@ server:
 # 数据库配置 durid 连接池
 # home
 spring:
+  thymeleaf:
+    prefix: classpath:/templates/
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/spring-boot?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
