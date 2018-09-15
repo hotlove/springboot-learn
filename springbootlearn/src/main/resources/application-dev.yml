@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 7777
 
 # 数据库配置 durid 连接池
 # home
@@ -44,4 +44,6 @@ spring:
 mybatis:
   type-aliases-package: com.guo.springboot.domain
   mapper-locations: classpath:mybatis/mapper/com/guo/springboot/dao/*.xml
+
+appid: 2016091300503955
 
