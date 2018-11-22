@@ -22,5 +22,9 @@
         <table tableName="profile" domainObjectName="Profile" alias="PP">
 			<property name="useActualColumnNames" value="false" />
 		</table>
+
+		<table tableName="time_task" domainObjectName="TimeTask" alias="TT">
+			<property name="useActualColumnNames" value="false" />
+		</table>
 	</context>
 </generatorConfiguration>

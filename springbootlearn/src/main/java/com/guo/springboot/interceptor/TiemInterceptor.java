@@ -17,11 +17,11 @@ public class TiemInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, java.lang.Object handler) throws Exception {
-        System.out.println("========preHandle=========");
-        System.out.println(((HandlerMethod)handler).getBean().getClass().getName());
-        System.out.println(((HandlerMethod)handler).getMethod().getName());
-
-        httpServletRequest.setAttribute("startTime", System.currentTimeMillis());
+//        System.out.println("========preHandle=========");
+//        System.out.println(((HandlerMethod)handler).getBean().getClass().getName());
+//        System.out.println(((HandlerMethod)handler).getMethod().getName());
+//
+//        httpServletRequest.setAttribute("startTime", System.currentTimeMillis());
 
         return true;
 
@@ -29,17 +29,17 @@ public class TiemInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, java.lang.Object o, ModelAndView modelAndView) throws Exception {
-        System.out.println("========postHandle=========");
-        Long start = (Long) httpServletRequest.getAttribute("startTime");
-        System.out.println("耗时:"+(System.currentTimeMillis() - start));
+//        System.out.println("========postHandle=========");
+//        Long start = (Long) httpServletRequest.getAttribute("startTime");
+//        System.out.println("耗时:"+(System.currentTimeMillis() - start));
     }
 
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, java.lang.Object o, Exception e) throws Exception {
-        System.out.println("========afterCompletion=========");
-        Long start = (Long) httpServletRequest.getAttribute("startTime");
-        System.out.println("耗时:"+(System.currentTimeMillis() - start));
-
-        System.out.println(e);
+//        System.out.println("========afterCompletion=========");
+//        Long start = (Long) httpServletRequest.getAttribute("startTime");
+//        System.out.println("耗时:"+(System.currentTimeMillis() - start));
+//
+//        System.out.println(e);
     }
 }

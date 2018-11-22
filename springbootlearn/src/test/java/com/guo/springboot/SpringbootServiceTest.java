@@ -8,6 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpringbootApplication.class)
@@ -32,6 +35,17 @@ public class SpringbootServiceTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void testTimeWheel() {
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(100);
+
+        scheduledExecutorService.scheduleAtFixedRate(() -> {
+            System.out.println("test");
+        }, 1000, 1000, TimeUnit.MILLISECONDS);
+
+    }
+
 
 
 }
