@@ -14,4 +14,9 @@ public class TestServiceImpl implements TestService {
 
         return "hello world";
     }
+
+    @Override
+    public void helloword() {
+        System.out.println("hello, world");
+    }
 }
