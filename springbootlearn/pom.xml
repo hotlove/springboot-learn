@@ -163,6 +163,21 @@
             <version>0.10</version>
         </dependency>
 
+        <!-- redis java客户端 -->
+        <!-- https://mvnrepository.com/artifact/io.lettuce/lettuce-core -->
+        <dependency>
+            <groupId>io.lettuce</groupId>
+            <artifactId>lettuce-core</artifactId>
+            <version>5.0.2.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-core</artifactId>
+            <version>3.1.6.RELEASE</version>
+        </dependency>
+        <!-- redis java 客户端结束 -->
+
 
     </dependencies>
 
