@@ -35,8 +35,8 @@ public class RedisTest {
 
         System.out.println(value);
 
-        connection.close();
-        redisClusterClient.shutdown();
+//        connection.close();
+//        redisClusterClient.shutdown();
 
 //        RedisClient client = RedisClient.create("redis://47.99.145.78:7001");
 //        StatefulRedisConnection<String, String> connection = client.connect();

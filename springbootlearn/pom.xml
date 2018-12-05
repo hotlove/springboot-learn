@@ -119,18 +119,9 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>2.9.0</version>
-        </dependency>
 
-        <dependency>
-            <groupId>io.lettuce</groupId>
-            <artifactId>lettuce-core</artifactId>
-            <version>5.0.2.RELEASE</version>
-        </dependency>
+
+
 
         <!-- 测试相关 -->
         <!-- spring 单元测试 -->
@@ -190,6 +181,16 @@
             <version>3.1.6.RELEASE</version>
         </dependency>
         <!-- redis java 客户端结束 -->
+
+
+        <!-- https://mvnrepository.com/artifact/org.redisson/redisson -->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>3.9.0</version>
+        </dependency>
+
+
 
 
     </dependencies>
