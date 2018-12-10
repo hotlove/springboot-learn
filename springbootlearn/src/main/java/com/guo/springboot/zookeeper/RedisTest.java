@@ -29,7 +29,7 @@ public class RedisTest {
 
         RedisAdvancedClusterCommands<String, String> commands = connection.sync();
 
-        commands.set("test", "testfoo");
+        commands.set("test", "testfoo111");
 
         String value = commands.get("test");
 

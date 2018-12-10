@@ -6,4 +6,15 @@ package com.guo.springboot.redis;
  * @Description:
  */
 public class RedisUtil {
+
+    private RedisUtil() {}
+
+    private static class Holder {
+        private static RedisUtil instance = new RedisUtil();
+    }
+
+    public static RedisUtil getInstance() {
+        return Holder.instance;
+    }
+
 }
