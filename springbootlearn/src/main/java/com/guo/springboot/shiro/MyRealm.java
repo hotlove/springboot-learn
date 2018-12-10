@@ -18,8 +18,8 @@ public class MyRealm extends AuthenticatingRealm {
         String password = (String) authenticationToken.getCredentials();
         System.out.println(password);
 
-
-        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(userName, password, getName() );
+        SimpleAuthenticationInfo simpleAuthenticationInfo =
+                new SimpleAuthenticationInfo(userName, password, getName() );
         return simpleAuthenticationInfo;
     }
 }
