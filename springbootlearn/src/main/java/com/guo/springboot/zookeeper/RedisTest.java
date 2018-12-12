@@ -9,13 +9,17 @@ import io.lettuce.core.api.sync.RedisStringCommands;
 import io.lettuce.core.cluster.RedisClusterClient;
 import io.lettuce.core.cluster.api.StatefulRedisClusterConnection;
 import io.lettuce.core.cluster.api.sync.RedisAdvancedClusterCommands;
+import redis.clients.jedis.HostAndPort;
+import redis.clients.jedis.JedisCluster;
 
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashSet;
 
 public class RedisTest {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
 //        RedisURI node1 = RedisURI.create("47.99.145.78", 7001);
 //        RedisURI node2 = RedisURI.create("47.99.145.78", 7002);
@@ -59,7 +63,21 @@ public class RedisTest {
 //
 //        System.out.println(value);
 
-        System.out.println(OrderEnum.APPROVE.getValue());
+//        System.out.println(RedisUtil.getInstance().incrementAndGet("orderId"));
+
+        HashSet<HostAndPort> node = new HashSet();
+        node.add(new HostAndPort("47.99.145.78",7001));
+        node.add(new HostAndPort("47.99.145.78",7002));
+        node.add(new HostAndPort("47.99.145.78",7003));
+        node.add(new HostAndPort("47.99.145.78",7004));
+        node.add(new HostAndPort("47.99.145.78",7005));
+        node.add(new HostAndPort("47.99.145.78",7006));
+
+        JedisCluster cluster = new JedisCluster(node);
+        cluster.set("orderkey", "orderdfasdfa");
+        System.out.println(cluster.get("orderkey"));
+        cluster.close();
+
     }
 
 }
