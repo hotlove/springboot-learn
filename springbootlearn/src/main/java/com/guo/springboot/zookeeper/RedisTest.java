@@ -4,11 +4,14 @@ import io.lettuce.core.RedisClient;
 import io.lettuce.core.RedisURI;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.sync.RedisStringCommands;
+import io.lettuce.core.cluster.ClusterClientOptions;
+import io.lettuce.core.cluster.ClusterTopologyRefreshOptions;
 import io.lettuce.core.cluster.RedisClusterClient;
 import io.lettuce.core.cluster.api.StatefulRedisClusterConnection;
 import io.lettuce.core.cluster.api.sync.RedisAdvancedClusterCommands;
 
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 public class RedisTest {
 
@@ -25,15 +28,30 @@ public class RedisTest {
         RedisClusterClient redisClusterClient =
                 RedisClusterClient.create(Arrays.asList(node1, node2, node3, node4, node5, node6));
 
+
+        // 设置 启用定期集群拓扑试图更新
+//        ClusterTopologyRefreshOptions topologyRefreshOptions = ClusterTopologyRefreshOptions.builder()
+//                .enablePeriodicRefresh(10, TimeUnit.MINUTES)
+//                .build();
+//
+//        redisClusterClient.setOptions(ClusterClientOptions.builder()
+//                .topologyRefreshOptions(topologyRefreshOptions)
+//                .build());
+
+
         StatefulRedisClusterConnection<String, String> connection = redisClusterClient.connect();
 
         RedisAdvancedClusterCommands<String, String> commands = connection.sync();
 
         commands.set("test", "testfoo111");
+        commands.set("test2", "特斯特啊啊啊");
 
         String value = commands.get("test");
 
         System.out.println(value);
+
+        String value2 = commands.get("test2");
+        System.out.println(value2);
 
 //        connection.close();
 //        redisClusterClient.shutdown();
