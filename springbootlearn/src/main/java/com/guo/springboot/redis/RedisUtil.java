@@ -68,4 +68,15 @@ public class RedisUtil {
         return commands.get(key);
     }
 
+    public Long incrementAndGet (String key) {
+        RedisAdvancedClusterCommands<String, String> commands = this.getCommands();
+
+        return commands.incr(key);
+    }
+
+    public Long incrementAndGet(String key, Long size) {
+        RedisAdvancedClusterCommands<String, String> commands = this.getCommands();
+
+        return commands.incrby(key, size);
+    }
 }
