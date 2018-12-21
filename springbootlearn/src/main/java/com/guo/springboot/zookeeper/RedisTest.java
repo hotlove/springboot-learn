@@ -62,36 +62,37 @@ public class RedisTest {
 //
 //        System.out.println(value);
 
-//        System.out.println(RedisUtil.getInstance().incrementAndGet("orderId"));
+        System.out.println(RedisUtil.getInstance().incrementAndGet("orderId"));
 
-        JedisPoolConfig config = new JedisPoolConfig();
-        config.setMaxTotal(100);
-        config.setMaxIdle(50);
-        config.setMaxWaitMillis(3000);
-        config.setTestOnBorrow(true);
-        config.setTestOnReturn(true);
-        // 集群
-        JedisShardInfo jedisShardInfo1 = new JedisShardInfo("47.99.145.78", 7001);
-        JedisShardInfo jedisShardInfo2 = new JedisShardInfo("47.99.145.78", 7002);
-        JedisShardInfo jedisShardInfo3 = new JedisShardInfo("47.99.145.78", 7003);
-        JedisShardInfo jedisShardInfo4 = new JedisShardInfo("47.99.145.78", 7004);
-        JedisShardInfo jedisShardInfo5 = new JedisShardInfo("47.99.145.78", 7005);
-        JedisShardInfo jedisShardInfo6 = new JedisShardInfo("47.99.145.78", 7006);
-        List<JedisShardInfo> list = new LinkedList<JedisShardInfo>();
-        list.add(jedisShardInfo1);
-        list.add(jedisShardInfo2);
-        list.add(jedisShardInfo3);
-        list.add(jedisShardInfo4);
-        list.add(jedisShardInfo5);
-        list.add(jedisShardInfo6);
-
-        ShardedJedisPool pool = new ShardedJedisPool(config, list);
-
-        ShardedJedis redis = pool.getResource();
-
-        String value = redis.get("test");
-
-        System.out.println(value);
+//        JedisPoolConfig config = new JedisPoolConfig();
+//        config.setMaxTotal(100);
+//        config.setMaxIdle(50);
+//        config.setMaxWaitMillis(3000);
+//        config.setTestOnBorrow(true);
+//        config.setTestOnReturn(true);
+//        // 集群
+//        JedisShardInfo jedisShardInfo1 = new JedisShardInfo("47.99.145.78", 7001);
+//        JedisShardInfo jedisShardInfo2 = new JedisShardInfo("47.99.145.78", 7002);
+//        JedisShardInfo jedisShardInfo3 = new JedisShardInfo("47.99.145.78", 7003);
+//        JedisShardInfo jedisShardInfo4 = new JedisShardInfo("47.99.145.78", 7004);
+//        JedisShardInfo jedisShardInfo5 = new JedisShardInfo("47.99.145.78", 7005);
+//        JedisShardInfo jedisShardInfo6 = new JedisShardInfo("47.99.145.78", 7006);
+//        List<JedisShardInfo> list = new LinkedList<JedisShardInfo>();
+//        list.add(jedisShardInfo1);
+//        list.add(jedisShardInfo2);
+//        list.add(jedisShardInfo3);
+//        list.add(jedisShardInfo4);
+//        list.add(jedisShardInfo5);
+//        list.add(jedisShardInfo6);
+//
+//        ShardedJedisPool pool = new ShardedJedisPool(config, list);
+//
+//        ShardedJedis redis = pool.getResource();
+//
+//        redis.set("test", "key");
+//        String value = redis.get("test");
+//
+//        System.out.println(value);
 
 
 
@@ -100,7 +101,7 @@ public class RedisTest {
 //        System.out.println(value);
 
         //创建集群中相应的节点对象,参数对应节点中的ip和端口号
-//
+
 //        HostAndPort h1  = new HostAndPort("47.99.145.78",7001);
 //
 //        HostAndPort h2  = new HostAndPort("47.99.145.78",7006);
