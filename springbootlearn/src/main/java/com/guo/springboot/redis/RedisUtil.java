@@ -6,8 +6,7 @@ import io.lettuce.core.cluster.api.StatefulRedisClusterConnection;
 import io.lettuce.core.cluster.api.sync.RedisAdvancedClusterCommands;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Auther: hotlove_linx
@@ -60,15 +59,28 @@ public class RedisUtil {
     }
 
     public void set(String key, String value) {
-        RedisAdvancedClusterCommands<String, String> commands = this.getCommands();
 
-        commands.set(key, value);
+        try {
+
+            RedisAdvancedClusterCommands<String, String> commands = this.getCommands();
+
+            commands.set(key, value);
+
+        } catch (Exception ex) {
+            logger.info(ex);
+        }
+
     }
 
     public String get(String key) {
-        RedisAdvancedClusterCommands<String, String> commands = this.getCommands();
+        try {
+            RedisAdvancedClusterCommands<String, String> commands = this.getCommands();
 
-        return commands.get(key);
+            return commands.get(key);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public Long incrementAndGet (String key) {
@@ -82,4 +94,148 @@ public class RedisUtil {
 
         return commands.incrby(key, size);
     }
+
+    /**
+     * 存储map结构数据
+     * @param key
+     * @param mapValue
+     * @return
+     */
+    public String setMap(String key, Map<String, String> mapValue) {
+        RedisAdvancedClusterCommands<String, String> commands = this.getCommands();
+        try {
+            return commands.hmset(key, mapValue);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    /**
+     * 获取map值
+     * @param key
+     * @return
+     */
+    public Map<String, String> getMap(String key) {
+        RedisAdvancedClusterCommands<String, String> commands = this.getCommands();
+
+        try {
+            return commands.hgetall(key);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    /**
+     * lpush 列表
+     * @param key
+     * @param values
+     * @return
+     */
+    public Long push(String key, List<String> values) {
+        RedisAdvancedClusterCommands<String, String> commands = this.getCommands();
+
+        try {
+            String []temp = new String[values.size()];
+            return commands.lpush(key, values.toArray(temp));
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.info(e);
+        }
+        return null;
+    }
+
+    /**
+     * lpush 单个值
+     * @param key
+     * @param value
+     * @return
+     */
+    public Long push(String key, String value) {
+
+        RedisAdvancedClusterCommands<String, String> commands = this.getCommands();
+
+        try {
+            return commands.lpush(key, value);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.info(e);
+        }
+
+        return 0L;
+    }
+
+    /**
+     * lpop 弹出队列中的第一个元素
+     * @param key
+     * @return
+     */
+    public String pop(String key) {
+        RedisAdvancedClusterCommands<String, String> commands = this.getCommands();
+
+        try {
+            return commands.lpop(key);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.info(e);
+        }
+        return null;
+    }
+
+    /**
+     * set 无序集合  里面存放的值是唯一的
+     * @param key
+     * @param value
+     * @return
+     */
+    public Long addSet(String key, String value) {
+        RedisAdvancedClusterCommands<String, String> commands = this.getCommands();
+
+        try {
+            return commands.sadd(key, value);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0L;
+    }
+
+    /**
+     * 增加set集合批量
+     * @param key
+     * @param values
+     * @return
+     */
+    public Long addSet(String key, Set<String> values) {
+
+        RedisAdvancedClusterCommands<String, String> commands = this.getCommands();
+
+        String []temp = new String[values.size()];
+        try {
+            commands.sadd(key, values.toArray(temp));
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.info(e);
+        }
+        return 0L;
+    }
+
+    public Set<String> getSet(String key) {
+        RedisAdvancedClusterCommands<String, String> commands = this.getCommands();
+
+        try {
+            String randomStr = commands.spop(key);
+            Set<String> result = new HashSet<>();
+            result.add(randomStr);
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
 }
