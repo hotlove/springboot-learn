@@ -222,6 +222,11 @@ public class RedisUtil {
         return 0L;
     }
 
+    /**
+     * 随机获取set 中的值
+     * @param key
+     * @return
+     */
     public Set<String> getSet(String key) {
         RedisAdvancedClusterCommands<String, String> commands = this.getCommands();
 
@@ -237,5 +242,51 @@ public class RedisUtil {
         return null;
     }
 
+    /**
+     * 获取set集合中全部值
+     * @param key
+     * @return
+     */
+    public Set<String> getSetAllValue(String key) {
+        RedisAdvancedClusterCommands<String, String> commands = this.getCommands();
+
+        try {
+            return commands.smembers(key);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.info(e);
+        }
+
+        return null;
+    }
+
+    /**
+     * -----------------有序集合---------------------------
+     */
+    public Long zadd(String key, double score, String value ) {
+
+        RedisAdvancedClusterCommands<String, String> commands = this.getCommands();
+
+        try {
+            return commands.zadd(key, score, value);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.info(e);
+        }
+        return 0L;
+    }
+
+    public Long zadd(String key, Map<Double, String> scoreValue) {
+
+        RedisAdvancedClusterCommands<String, String> commands = this.getCommands();
+
+        try {
+            return commands.zadd(key, scoreValue);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.info(e);
+        }
+        return 0L;
+    }
 
 }
