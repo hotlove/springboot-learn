@@ -62,7 +62,7 @@ public class RedisTest {
 //
 //        System.out.println(value);
 
-//        System.out.println(RedisUtil.getInstance().incrementAndGet("orderId"));
+        System.out.println(RedisUtil.getInstance().incrementAndGet("orderId"));
 
 //        JedisPoolConfig config = new JedisPoolConfig();
 //        config.setMaxTotal(100);
@@ -89,7 +89,7 @@ public class RedisTest {
 //
 //        ShardedJedis redis = pool.getResource();
 //
-//        redis.set("test", "value");
+//        redis.set("test", "key");
 //        String value = redis.get("test");
 //
 //        System.out.println(value);
@@ -137,15 +137,9 @@ public class RedisTest {
 //        JedisCluster jc = new JedisCluster(hs);
 //
 //        //直接进行相应的操作，和jedis一致
-//        jc.set("key", "testvalue");
-//        String value = jc.get("key");
+//
+//        String value = jc.get("test");
 //        System.out.println(value);
-
-        Jedis jedis = new Jedis("47.99.145.78", 7002);
-
-        jedis.set("key1", "value1");
-
-        System.out.println(jedis.get("key1"));
     }
 
 
