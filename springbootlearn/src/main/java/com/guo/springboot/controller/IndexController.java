@@ -1,11 +1,16 @@
 package com.guo.springboot.controller;
 
+import com.google.zxing.WriterException;
 import com.guo.springboot.pay.ThirdyPay;
+import com.guo.springboot.service.DownloadService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -17,6 +22,9 @@ public class IndexController {
 
     @Resource(name = "thirdyPay")
     private ThirdyPay thirdyPay;
+
+    @Resource
+    private DownloadService downloadService;
 
     @RequestMapping(value = "/login")
     public ModelAndView index() {
@@ -53,5 +61,10 @@ public class IndexController {
         System.out.println("trade_no---------------"+ trade_no);
         System.out.println("out_trade_no--------------"+ out_trade_no);
         return "ok";
+    }
+
+    @RequestMapping(value = "/testdown")
+    public void testdown(HttpServletRequest request, HttpServletResponse response) throws IOException, WriterException {
+        downloadService.download(request, response, null);
     }
 }
