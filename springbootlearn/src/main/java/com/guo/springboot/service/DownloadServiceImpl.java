@@ -70,6 +70,7 @@ public class DownloadServiceImpl implements DownloadService {
 
         zipOutputStream.flush();
         zipOutputStream.close();
+        inputStream.close();
         outputStream.flush();
         outputStream.close();
     }
