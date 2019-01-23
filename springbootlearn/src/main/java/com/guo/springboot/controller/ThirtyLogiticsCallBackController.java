@@ -21,11 +21,13 @@ import java.util.Map;
 public class ThirtyLogiticsCallBackController {
 
     //电商ID
-    private String EBusinessID="test1421571";
+    private String EBusinessID="1421571";
     //电商加密私钥，快递鸟提供，注意保管，不要泄漏
-    private String AppKey="b1afbdac-4a3c-4a20-8e80-5f3c6a824bf8";
+    private String AppKey="28231dab-8dec-45c8-bc50-2fe6c52078a7";
     //测试请求url
     private String ReqURL = "http://testapi.kdniao.com:8081/api/dist";
+
+    private String queryImmit = "http://sandboxapi.kdniao.com:8080/kdniaosandbox/gateway/exterfaceInvoke.json";
     //正式请求url
     //private String ReqURL = "http://api.kdniao.com/api/dist";
 
@@ -34,6 +36,10 @@ public class ThirtyLogiticsCallBackController {
 
         System.out.println(DataSign);
         System.out.println(RequestData);
+
+        Map<String, Object> jsonObject = JSON.parseObject(RequestData);
+        Object obj =  jsonObject.get("Data");
+        System.out.println(obj);
 
 //        System.out.println("-------------------回调了------");
 
@@ -47,8 +53,14 @@ public class ThirtyLogiticsCallBackController {
 
         String r = JSON.toJSONString(result);
 
-        System.out.println("回调返回数据:"+r);
-        response.getWriter().print(r);
+        String resultparam = "{\n" +
+                " \"EBusinessID\": \"test1421571\",\n" +
+                " \"UpdateTime\": \"2015-03-11 16:26:11\",\n" +
+                " \"Success\": true,\n" +
+                " \"Reason\": \"\"\n" +
+                "}";
+        System.out.println("回调返回数据:"+resultparam);
+        response.getWriter().println(resultparam);
 //        OutputStream outputStream = response.getOutputStream();
 //
 //        PrintWriter writer = new PrintWriter(outputStream);
