@@ -14,6 +14,7 @@ import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -28,6 +29,8 @@ public class ThirtyLogiticsCallBackController {
     private String ReqURL = "http://testapi.kdniao.com:8081/api/dist";
 
     private String queryImmit = "http://sandboxapi.kdniao.com:8080/kdniaosandbox/gateway/exterfaceInvoke.json";
+
+    private String queyrUrl = "http://api.kdniao.com/Ebusiness/EbusinessOrderHandle.aspx";
     //正式请求url
     //private String ReqURL = "http://api.kdniao.com/api/dist";
 
@@ -123,18 +126,24 @@ public class ThirtyLogiticsCallBackController {
     @RequestMapping(value = "/queryLogistcis")
     public String queryLogistcis(HttpServletRequest request) throws Exception {
 
-        String requestData= "{\"OrderCode\":\"\",\"ShipperCode\":\"SF\",\"LogisticCode\":\"1234561\",\"IsHandleInfo\":\"0\"}";
+        String requestData= "{\"OrderCode\":\"\",\"ShipperCode\":\"YTO\",\"LogisticCode\":\"803297563988828463\"}";
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("RequestData", urlEncoder(requestData, "UTF-8"));
-        params.put("EBusinessID", "1421571");
+        params.put("EBusinessID", EBusinessID);
         params.put("RequestType", "1002");
         String dataSign=encrypt(requestData, AppKey, "UTF-8");
+//        String dataSign = "OTc5ODhmMzRjNWJhNTU2YmNlZTJlNjI3ZTkzNDM1Nzk";
         params.put("DataSign", urlEncoder(dataSign, "UTF-8"));
         params.put("DataType", "2");
 
-        String result=sendPostA(ReqURL, params);
+        String result=sendPostA(queyrUrl, params);
 
+        Map<String, Object> jsonObject = JSON.parseObject(result);
+
+        List<String> traces = (List<String>) jsonObject.get("Traces");
+
+        System.out.println(traces.size());
         System.out.println("查询成功------" + result);
         return result;
     }

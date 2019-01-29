@@ -1,5 +1,7 @@
 package com.guo.springboot;
 
+import com.alibaba.fastjson.JSON;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -11,9 +13,17 @@ public class TestMain {
     public static void main(String[] args) {
 
 
-        int currentSlotIndex = 0;
+        String arra = "[{" +
+                        "'GoodsName':'鞋子','Goodsquantity':1,'GoodsWeight':1.0}]";
 
-        List<Task> timeWheel = new ArrayList<>(12);
+        List<Object> result = JSON.parseArray(arra);
+
+        result.forEach(e -> {
+            System.out.println(e.toString());
+        });
+//        int currentSlotIndex = 0;
+//
+//        List<Task> timeWheel = new ArrayList<>(12);
 
 
     }
