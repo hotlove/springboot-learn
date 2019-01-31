@@ -30,6 +30,30 @@ public class ZkUtil {
 
         if (zookeeperFactory != null) {
 
+            /**
+             * CreateMode
+             * PERSISTENT  持久节点,
+             * PERSISTENT_SEQUENTIAL 持节顺序节点,
+             * EPHEMERAL  临时节点,
+             * EPHEMERAL_SEQUENTIAL 临时顺序节点;
+             */
+            return zookeeperFactory.createSync(path, content, CreateMode.PERSISTENT);
+
+        }
+        return null;
+    }
+
+    public String creteNodeEPHEMERAL(String path, String content) {
+
+        if (zookeeperFactory != null) {
+
+            /**
+             * CreateMode
+             * PERSISTENT  持久节点,
+             * PERSISTENT_SEQUENTIAL 持节顺序节点,
+             * EPHEMERAL  临时节点,
+             * EPHEMERAL_SEQUENTIAL 临时顺序节点;
+             */
             return zookeeperFactory.createSync(path, content, CreateMode.EPHEMERAL);
 
         }

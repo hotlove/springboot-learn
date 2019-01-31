@@ -1,0 +1,7 @@
+POST {{url}}/fastjson/profile
+Accept : application/json
+Content-Type : application/json;charset=UTF-8
+Authorization: Basic client secret
+Cache-Control : no-cache
+
+###

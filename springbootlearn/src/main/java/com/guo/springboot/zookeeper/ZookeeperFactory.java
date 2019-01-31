@@ -24,7 +24,9 @@ public class ZookeeperFactory implements Watcher{
         if (zooKeeper == null) {
             synchronized (this) {
                 if (zooKeeper == null) {
-                    zooKeeper = new ZooKeeper("127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183",
+//                    zooKeeper = new ZooKeeper("127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183",
+//                            5000, new ZookeeperFactory());
+                    zooKeeper = new ZooKeeper("47.99.145.78:2181,47.99.145.78:2182,47.99.145.78:2183",
                             5000, new ZookeeperFactory());
                     try {
                         connectSemphore.await();
