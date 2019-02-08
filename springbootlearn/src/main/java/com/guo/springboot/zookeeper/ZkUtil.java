@@ -40,7 +40,7 @@ public class ZkUtil {
 
     }
 
-    public String creteNodeEPHEMERAL(String path, String content) {
+    public String creteNodeEphemeral(String path, String content) {
 
         /**
          * CreateMode
@@ -52,7 +52,33 @@ public class ZkUtil {
         return this.createNode(path, content, CreateMode.EPHEMERAL);
     }
 
+    /**
+     * 创建临时节点 带顺序
+     * @param path
+     * @param content
+     * @return
+     */
+    public String createNodeEphemeralSeq(String path, String content) {
+        return this.createNode(path, content, CreateMode.EPHEMERAL_SEQUENTIAL);
+    }
+
+    /**
+     * 创建节点
+     * @param path
+     * @param content
+     * @param nodeMode 节点模式
+     * @return
+     */
     public String createNode(String path, String content, CreateMode nodeMode) {
        return ZookeeperFactory.getInstace().createSync(path, content, nodeMode);
+    }
+
+    /**
+     * 同步删除节点信息
+     * @param path
+     * @param version
+     */
+    public void deleteSync(String path, int version) {
+        ZookeeperFactory.getInstace().delete(path, version);
     }
 }

@@ -26,10 +26,10 @@ public class ZookeeperFactory implements Watcher{
                 if (zooKeeper == null) {
 
                     try {
-//                    zooKeeper = new ZooKeeper("127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183",
-//                            5000, new ZookeeperFactory());
-                        zooKeeper = new ZooKeeper("47.99.145.78:2181,47.99.145.78:2182,47.99.145.78:2183",
-                                5000, new ZookeeperFactory());
+                    zooKeeper = new ZooKeeper("127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183",
+                            5000, new ZookeeperFactory());
+//                        zooKeeper = new ZooKeeper("47.99.145.78:2181,47.99.145.78:2182,47.99.145.78:2183",
+//                                5000, new ZookeeperFactory());
 
                         connectSemphore.await();
                     } catch (IOException e) {
@@ -63,5 +63,26 @@ public class ZookeeperFactory implements Watcher{
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void delete(String path, int version) {
+        try {
+            this.getZookeeperClient().delete(path, version);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (KeeperException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *
+     * @param path 节点路径
+     * @param version 指定节点的数据版本，即表明本次删除操作是针对该数据版本进行的
+     * @param cb 注册一个异步回调函数
+     * @param ctx 用于传递上线文信息的对象
+     */
+    public void deleteAsync(String path, int version, AsyncCallback.VoidCallback cb, Object ctx) {
+        this.getZookeeperClient().delete(path, version, cb, ctx);
     }
 }
