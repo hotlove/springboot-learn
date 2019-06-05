@@ -16,7 +16,8 @@ public class ZookeeperLearn implements Watcher{
 
     public static void main(String[] args) throws IOException, InterruptedException, KeeperException {
 
-        zooKeeper = new ZooKeeper("127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183", 50000,new ZookeeperLearn());
+//        zooKeeper = new ZooKeeper("127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183", 50000,new ZookeeperLearn());
+        zooKeeper = new ZooKeeper("127.0.0.1:2181", 50000,new ZookeeperLearn());
 
         // 等待zookeeper连接成功
         countDownLatch.await();
@@ -24,11 +25,11 @@ public class ZookeeperLearn implements Watcher{
 //        zooKeeper.create("/cloud-config", "test".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 
         // 第二个参数watch true表示使用默认的监听器
-        byte[] datas = zooKeeper.getData("/cloud-config", true, new Stat());
-        System.out.println(new String(datas));
+//        byte[] datas = zooKeeper.getData("/cloud-config", true, new Stat());
+//        System.out.println(new String(datas));
 
+        new Thread(new ZookeeperMonitor("/cloud-config", zooKeeper)).start();
 
-        Thread.sleep(Integer.MAX_VALUE);
     }
 
 
