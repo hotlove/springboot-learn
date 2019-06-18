@@ -168,12 +168,12 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
-        <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-            <version>2.9.0</version>
+            <version>3.0.1</version>
         </dependency>
+
 
 
 
