@@ -141,16 +141,12 @@ public class RedisTest {
 //        String value = jc.get("test");
 //        System.out.println(value);
 
-        Jedis jedis = new Jedis("47.99.145.78", 6379);
+
+        Jedis jedis = new Jedis("47.99.145.78", 6377);
+        jedis.auth("accomplish8512");
         jedis.set("foo", "bar");
-        jedis.set("foo1", "bar1");
-        jedis.set("foo2", "bar2");
-        Map<String, String> valueMap = new HashMap<>();
-        valueMap.put("name", "小强");
-        valueMap.put("setx", "美女");
-        jedis.hset("mymap",valueMap );
+
         String value = jedis.get("foo");
-        Map<String, String> m = jedis.hgetAll("mymap");
         System.out.println(value);
     }
 
