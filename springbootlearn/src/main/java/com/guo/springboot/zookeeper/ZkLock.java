@@ -6,6 +6,7 @@ import org.apache.zookeeper.data.Stat;
 
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class ZkLock implements Watcher {
 
@@ -24,33 +25,27 @@ public class ZkLock implements Watcher {
         return zooKeeper;
     }
 
-    public boolean tryAccquire(String path) throws IOException, InterruptedException, KeeperException {
+    public void lock(String path) throws IOException, InterruptedException, KeeperException {
 
-        this.flag = this.createNode(path);
+        this.createNode(path);
 
-        if (this.flag) {
-            return this.flag;
-        } else {
-
-            // 没有获取到锁 等待别人释放锁
-            while (!this.flag) {
-
-            }
-            return true;
+        while (!this.flag) {
 
         }
     }
 
-    private boolean createNode(String path) throws IOException, InterruptedException, KeeperException {
+    private void createNode(String path) throws IOException, InterruptedException, KeeperException {
         if (zooKeeper == null) {
             zooKeeper = this.newZkLock();
         }
 
         String responsePath = zooKeeper.create(path, "exclusive_lock".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE ,CreateMode.EPHEMERAL);
         if (StringUtils.isNotBlank(responsePath)) {
-            return true;
+            this.flag = true;
+        } else {
+
+
         }
-        return false;
     }
 
     @Override
