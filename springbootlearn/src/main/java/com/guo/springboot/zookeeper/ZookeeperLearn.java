@@ -11,9 +11,9 @@ public class ZookeeperLearn implements Watcher{
 
 
     // 同步锁用于客户端连接
-    public static CountDownLatch countDownLatch = new CountDownLatch(1);
+    private static CountDownLatch countDownLatch = new CountDownLatch(1);
 
-    public static ZooKeeper zooKeeper = null;
+    private static ZooKeeper zooKeeper = null;
 
     public static void main(String[] args) throws IOException, InterruptedException, KeeperException {
 

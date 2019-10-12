@@ -1,11 +1,13 @@
 package com.guo.springboot;
 
 import com.alibaba.fastjson.JSON;
+import io.jsonwebtoken.lang.Strings;
+import org.junit.Test;
 
-import javax.sound.midi.Soundbank;
-import java.math.BigDecimal;
-import java.net.SocketTimeoutException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -13,10 +15,62 @@ import java.util.stream.Collectors;
 
 public class MyTest {
 
-    public static void main(String[] args) {
-        BigDecimal bigDecimal = new BigDecimal("12.45");
+    static class TestMap {
+        Long id;
+        String value;
 
-        System.out.println(bigDecimal.setScale(2, BigDecimal.ROUND_UP));
+        TestMap(Long id, String value) {
+            this.id = id;
+            this.value = value;
+        }
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        List<TestMap> testMaps = new ArrayList<>();
+        TestMap tm1 = new TestMap(1L, "test1");
+        TestMap tm2 = new TestMap(2L, "test2");
+        TestMap tm3 = new TestMap(3L, "test3");
+        testMaps.add(tm1);
+        testMaps.add(tm2);
+        testMaps.add(tm3);
+
+        Map<String, String> map = new HashMap<>();
+        testMaps.stream().forEach(e -> map.merge(e.getId() + "", e.getValue(), String::concat));
+        System.out.println(JSON.toJSON(map));
+
+        String values = testMaps.stream().map(TestMap::getValue).collect(Collectors.joining(","));
+
+        System.out.println(values);
+
+//        LocalDateTime localDateTime = LocalDateTime.now();
+//        // 从当前时间计算30分钟后的时间
+//        LocalDateTime delayDateTime = localDateTime.plusMinutes(30L);
+//
+//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+//
+//        String delayDateTimeStr = dtf.format(delayDateTime);
+//
+//        System.out.println(delayDateTimeStr+":00");
+
+//        BigDecimal bigDecimal = new BigDecimal("12.45");
+//
+//        System.out.println(bigDecimal.setScale(2, BigDecimal.ROUND_UP));
 //        System.out.println("".equals(""));
 //        List<M> mList = new ArrayList<>(4);
 //
