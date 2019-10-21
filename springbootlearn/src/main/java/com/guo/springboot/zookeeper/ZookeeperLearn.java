@@ -5,14 +5,15 @@ import org.apache.zookeeper.data.Stat;
 
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class ZookeeperLearn implements Watcher{
 
 
     // 同步锁用于客户端连接
-    public static CountDownLatch countDownLatch = new CountDownLatch(1);
+    private static CountDownLatch countDownLatch = new CountDownLatch(1);
 
-    public static ZooKeeper zooKeeper = null;
+    private static ZooKeeper zooKeeper = null;
 
     public static void main(String[] args) throws IOException, InterruptedException, KeeperException {
 
@@ -22,6 +23,7 @@ public class ZookeeperLearn implements Watcher{
 
         // 等待zookeeper连接成功
         countDownLatch.await();
+        System.out.println("链接成功");
 
 //        zooKeeper.create("/cloud-config", "test".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 
