@@ -40,23 +40,39 @@ public class MyTest {
         }
     }
 
+    public static boolean isBlank(String str) {
+        int strLen;
+        if (str == null || (strLen = str.length()) == 0) {
+            return true;
+        }
+        for (int i = 0; i < strLen; i++) {
+            if ((Character.isWhitespace(str.charAt(i)) == false)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
 
-        List<TestMap> testMaps = new ArrayList<>();
-        TestMap tm1 = new TestMap(1L, "test1");
-        TestMap tm2 = new TestMap(2L, "test2");
-        TestMap tm3 = new TestMap(3L, "test3");
-        testMaps.add(tm1);
-        testMaps.add(tm2);
-        testMaps.add(tm3);
+        String test = "";
 
-        Map<String, String> map = new HashMap<>();
-        testMaps.stream().forEach(e -> map.merge(e.getId() + "", e.getValue(), String::concat));
-        System.out.println(JSON.toJSON(map));
-
-        String values = testMaps.stream().map(TestMap::getValue).collect(Collectors.joining(","));
-
-        System.out.println(values);
+        System.out.println(isBlank(test));
+//        List<TestMap> testMaps = new ArrayList<>();
+//        TestMap tm1 = new TestMap(1L, "test1");
+//        TestMap tm2 = new TestMap(2L, "test2");
+//        TestMap tm3 = new TestMap(3L, "test3");
+//        testMaps.add(tm1);
+//        testMaps.add(tm2);
+//        testMaps.add(tm3);
+//
+//        Map<String, String> map = new HashMap<>();
+//        testMaps.stream().forEach(e -> map.merge(e.getId() + "", e.getValue(), String::concat));
+//        System.out.println(JSON.toJSON(map));
+//
+//        String values = testMaps.stream().map(TestMap::getValue).collect(Collectors.joining(","));
+//
+//        System.out.println(values);
 
 //        LocalDateTime localDateTime = LocalDateTime.now();
 //        // 从当前时间计算30分钟后的时间
