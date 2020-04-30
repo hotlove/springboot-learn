@@ -51,6 +51,12 @@ public class MyTest {
     }
 
     public static void main(String[] args) {
+        List<String> strList = new ArrayList<>();
+        strList.add("");
+        strList.add("2");
+        strList.add("3");
+
+        System.out.println(String.join(",", strList));
 //        Integer a = new Integer(123);
 //        int b = 123;
 //
@@ -59,17 +65,17 @@ public class MyTest {
 //        String test = "";
 //
 //        System.out.println(isBlank(test));
-        List<TestMap> testMaps = new ArrayList<>();
-        TestMap tm1 = new TestMap(14L, "test1");
-        TestMap tm2 = new TestMap(2L, "test2");
-        TestMap tm3 = new TestMap(3L, "test3");
-        testMaps.add(tm1);
-        testMaps.add(tm2);
-        testMaps.add(tm3);
-
-        List<TestMap> sort = testMaps.stream().sorted(Comparator.comparingLong(TestMap::getId).reversed()).collect(Collectors.toList());
-
-        sort.forEach(e -> System.out.println(e.getId()));
+//        List<TestMap> testMaps = new ArrayList<>();
+//        TestMap tm1 = new TestMap(14L, "test1");
+//        TestMap tm2 = new TestMap(2L, "test2");
+//        TestMap tm3 = new TestMap(3L, "test3");
+//        testMaps.add(tm1);
+//        testMaps.add(tm2);
+//        testMaps.add(tm3);
+//
+//        List<TestMap> sort = testMaps.stream().sorted(Comparator.comparingLong(TestMap::getId).reversed()).collect(Collectors.toList());
+//
+//        sort.forEach(e -> System.out.println(e.getId()));
 //
 //        Map<String, String> map = new HashMap<>();
 //        testMaps.stream().forEach(e -> map.merge(e.getId() + "", e.getValue(), String::concat));
