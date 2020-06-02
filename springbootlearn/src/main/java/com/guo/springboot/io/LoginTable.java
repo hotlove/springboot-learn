@@ -22,4 +22,8 @@ public class LoginTable {
     public Socket getSocket(Integer id) {
         return this.loginTable.get(id);
     }
+
+    public void deleteSocket(Integer id) {
+        this.loginTable.remove(id);
+    }
 }
