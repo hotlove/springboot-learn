@@ -46,6 +46,8 @@ public class NettyServer {
                 System.out.println(new Date() + ": 端口[" + port + "]绑定成功!");
             } else {
                 System.err.println("端口[" + port + "]绑定失败!");
+                // 循环找到可以绑定的端口
+                bind(serverBootstrap, port + 1);
             }
         });
     }
