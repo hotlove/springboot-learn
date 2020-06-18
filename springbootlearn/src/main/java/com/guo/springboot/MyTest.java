@@ -6,10 +6,7 @@ import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -54,17 +51,31 @@ public class MyTest {
     }
 
     public static void main(String[] args) {
+        List<String> strList = new ArrayList<>();
+        strList.add("");
+        strList.add("2");
+        strList.add("3");
 
-        String test = "";
+        System.out.println(String.join(",", strList));
+//        Integer a = new Integer(123);
+//        int b = 123;
+//
+//        System.out.println(a == b);
 
-        System.out.println(isBlank(test));
+//        String test = "";
+//
+//        System.out.println(isBlank(test));
 //        List<TestMap> testMaps = new ArrayList<>();
-//        TestMap tm1 = new TestMap(1L, "test1");
+//        TestMap tm1 = new TestMap(14L, "test1");
 //        TestMap tm2 = new TestMap(2L, "test2");
 //        TestMap tm3 = new TestMap(3L, "test3");
 //        testMaps.add(tm1);
 //        testMaps.add(tm2);
 //        testMaps.add(tm3);
+//
+//        List<TestMap> sort = testMaps.stream().sorted(Comparator.comparingLong(TestMap::getId).reversed()).collect(Collectors.toList());
+//
+//        sort.forEach(e -> System.out.println(e.getId()));
 //
 //        Map<String, String> map = new HashMap<>();
 //        testMaps.stream().forEach(e -> map.merge(e.getId() + "", e.getValue(), String::concat));
@@ -129,6 +140,9 @@ public class MyTest {
 //        m4.setE("优质");
 //        m4.setF("基地3");
 //        mList.add(m4);
+//
+//        long result = mList.stream().filter(e -> e.getF().equals("xxx")).count();
+//        System.out.println(result);
 //
 //        // 根据基地分组
 //        Map<String, List<M>> fMap = mList.stream().collect(Collectors.groupingBy(e -> e.getF()));

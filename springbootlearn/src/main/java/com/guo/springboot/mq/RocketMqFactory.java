@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class RocketMqFactory {
 
-    private String namesrvAddr = "47.99.145.78:9876";
+    private String namesrvAddr = "127.0.0.1:9876";
 
     private ConcurrentHashMap<String, DefaultMQProducer> producerMap = new ConcurrentHashMap<>();
 
@@ -18,9 +18,7 @@ public class RocketMqFactory {
         private static final RocketMqFactory instance = new RocketMqFactory();
     }
 
-    private RocketMqFactory() {
-
-    }
+    private RocketMqFactory() {}
 
     public static RocketMqFactory getInstance() {
         return Holder.instance;
@@ -57,7 +55,7 @@ public class RocketMqFactory {
     }
 
     public static void main(String[] args) {
-        String msg = "test";
+        String msg = "tes111t";
         String topic = "mytopic";
 
         SendResult sendResult = RocketMqFactory.getInstance().sendMsg(msg, topic);
