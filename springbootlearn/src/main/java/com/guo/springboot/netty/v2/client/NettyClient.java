@@ -1,5 +1,8 @@
 package com.guo.springboot.netty.v2.client;
 
+import com.guo.springboot.netty.v2.client.handler.LoginResponseHanlder;
+import com.guo.springboot.netty.v2.codec.PackectDecoder;
+import com.guo.springboot.netty.v2.codec.PacketEncoder;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -17,7 +20,10 @@ public class NettyClient {
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new FirstClientHandler());
+                        ch.pipeline()
+                                .addLast(new PackectDecoder())
+                                .addLast(new LoginResponseHanlder())
+                                .addLast(new PacketEncoder());
                     }
                 });
 

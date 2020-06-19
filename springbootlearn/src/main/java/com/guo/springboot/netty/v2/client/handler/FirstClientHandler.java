@@ -1,4 +1,4 @@
-package com.guo.springboot.netty.v2.client;
+package com.guo.springboot.netty.v2.client.handler;
 
 import com.guo.springboot.netty.v2.serialize.LoginPacket;
 import com.guo.springboot.netty.v2.serialize.PacketCodeC;

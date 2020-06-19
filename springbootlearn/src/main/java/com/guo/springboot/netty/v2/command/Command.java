@@ -1,4 +1,4 @@
-package com.guo.springboot.netty.v2.serialize;
+package com.guo.springboot.netty.v2.command;
 
 public interface Command {
     Byte LOGIN_REQUEST = 1;

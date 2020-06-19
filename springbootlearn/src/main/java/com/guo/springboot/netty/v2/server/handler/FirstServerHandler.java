@@ -1,4 +1,4 @@
-package com.guo.springboot.netty.v2.server;
+package com.guo.springboot.netty.v2.server.handler;
 
 import com.guo.springboot.netty.v2.serialize.Packet;
 import com.guo.springboot.netty.v2.serialize.PacketCodeC;

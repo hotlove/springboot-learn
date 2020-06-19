@@ -1,5 +1,6 @@
 package com.guo.springboot.netty.v2.serialize;
 
+import com.guo.springboot.netty.v2.command.Command;
 import io.netty.buffer.ByteBuf;
 
 import java.util.HashMap;

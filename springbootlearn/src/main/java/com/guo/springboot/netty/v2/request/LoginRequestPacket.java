@@ -1,14 +1,19 @@
-package com.guo.springboot.netty.v2.serialize;
+package com.guo.springboot.netty.v2.request;
 
 import com.guo.springboot.netty.v2.command.Command;
+import com.guo.springboot.netty.v2.serialize.Packet;
 
-public class LoginPacket extends Packet {
-
+public class LoginRequestPacket extends Packet {
     private Integer userId;
 
     private String userName;
 
     private String password;
+
+    @Override
+    public Byte getCommand() {
+        return Command.LOGIN_REQUEST;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -32,14 +37,5 @@ public class LoginPacket extends Packet {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    Byte getCommand() {
-        return Command.LOGIN_REQUEST;
-    }
-
-    public String toString() {
-        return "userId:"+userId+" userName:"+userName+" password:"+password;
     }
 }
