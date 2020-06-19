@@ -264,6 +264,13 @@
             <version>4.1.6.Final</version>
         </dependency>
 
+        <!-- kryo 序列化 -->
+        <dependency>
+            <groupId>com.esotericsoftware</groupId>
+            <artifactId>kryo-shaded</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+
 
 
     </dependencies>

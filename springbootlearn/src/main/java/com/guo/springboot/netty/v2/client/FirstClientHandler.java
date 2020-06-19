@@ -1,5 +1,7 @@
 package com.guo.springboot.netty.v2.client;
 
+import com.guo.springboot.netty.v2.serialize.LoginPacket;
+import com.guo.springboot.netty.v2.serialize.PacketCodeC;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import io.netty.channel.ChannelHandlerContext;
@@ -21,12 +23,24 @@ public class FirstClientHandler extends ChannelInboundHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println(new Date() + ":客户端写出数据");
 
-        // 获取数据
-        ByteBuf byteBuf = this.getByteBuf(ctx);
+//        // 获取数据
+//        ByteBuf byteBuf = this.getByteBuf(ctx);
 
         // 写数据
-        ctx.channel().writeAndFlush(byteBuf);
+//        ctx.channel().writeAndFlush(byteBuf);
 
+        LoginPacket loginPacket = new LoginPacket();
+        loginPacket.setUserId(1);
+        loginPacket.setUserName("xiaoqiang");
+        loginPacket.setPassword("123");
+
+        ByteBuf byteBuf = ctx.alloc().buffer();
+
+        PacketCodeC.INSTANCE.encode(byteBuf, loginPacket);
+        System.out.println(loginPacket);
+        System.out.println(byteBuf.toString());
+
+        ctx.channel().writeAndFlush(byteBuf);
     }
 
     private ByteBuf getByteBuf(ChannelHandlerContext ctx) {
