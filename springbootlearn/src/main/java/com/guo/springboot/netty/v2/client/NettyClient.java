@@ -1,6 +1,7 @@
 package com.guo.springboot.netty.v2.client;
 
 import com.guo.springboot.netty.v2.client.handler.LoginResponseHanlder;
+import com.guo.springboot.netty.v2.client.handler.MessageResponseHandler;
 import com.guo.springboot.netty.v2.codec.PackectDecoder;
 import com.guo.springboot.netty.v2.codec.PacketEncoder;
 import io.netty.bootstrap.Bootstrap;
@@ -23,6 +24,7 @@ public class NettyClient {
                         ch.pipeline()
                                 .addLast(new PackectDecoder())
                                 .addLast(new LoginResponseHanlder())
+                                .addLast(new MessageResponseHandler())
                                 .addLast(new PacketEncoder());
                     }
                 });

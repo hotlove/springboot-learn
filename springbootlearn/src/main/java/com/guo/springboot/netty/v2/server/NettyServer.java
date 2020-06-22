@@ -1,6 +1,10 @@
 package com.guo.springboot.netty.v2.server;
 
+import com.guo.springboot.netty.v2.codec.PackectDecoder;
+import com.guo.springboot.netty.v2.codec.PacketEncoder;
 import com.guo.springboot.netty.v2.server.handler.FirstServerHandler;
+import com.guo.springboot.netty.v2.server.handler.LoginRequestHandler;
+import com.guo.springboot.netty.v2.server.handler.MessageRequestHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -22,7 +26,12 @@ public class NettyServer {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
-                        nioSocketChannel.pipeline().addLast(new FirstServerHandler());
+//                        nioSocketChannel.pipeline().addLast(new FirstServerHandler());
+                        nioSocketChannel.pipeline()
+                                .addLast(new PackectDecoder())
+                                .addLast(new LoginRequestHandler())
+                                .addLast(new MessageRequestHandler())
+                                .addLast(new PacketEncoder());
                     }
                 });
 

@@ -4,7 +4,7 @@ import com.guo.springboot.netty.v2.command.Command;
 import com.guo.springboot.netty.v2.serialize.Packet;
 
 public class LoginRequestPacket extends Packet {
-    private Integer userId;
+    private String userId;
 
     private String userName;
 
@@ -15,11 +15,11 @@ public class LoginRequestPacket extends Packet {
         return Command.LOGIN_REQUEST;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
