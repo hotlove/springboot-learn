@@ -1,6 +1,10 @@
 package com.guo.springboot.netty.v2.serialize;
 
 import com.guo.springboot.netty.v2.command.Command;
+import com.guo.springboot.netty.v2.request.LoginRequestPacket;
+import com.guo.springboot.netty.v2.request.MessageRequestPacket;
+import com.guo.springboot.netty.v2.response.LoginResponsePacket;
+import com.guo.springboot.netty.v2.response.MessageResponsePacket;
 import io.netty.buffer.ByteBuf;
 
 import java.util.HashMap;
@@ -17,7 +21,10 @@ public class PacketCodeC {
     public final Map<Byte, Serializer> serializerMap = new HashMap<>();
 
     public PacketCodeC() {
-        packetMap.put(Command.LOGIN_REQUEST, LoginPacket.class);
+        packetMap.put(Command.LOGIN_REQUEST, LoginRequestPacket.class);
+        packetMap.put(Command.LOGIN_RESPONSE, LoginResponsePacket.class);
+        packetMap.put(Command.MESSAGE_REQUEST, MessageRequestPacket.class);
+        packetMap.put(Command.MESSAGE_RESPONSE, MessageResponsePacket.class);
 
         serializerMap.put(SerializerAlogrithm.KYRO, new KyroSerializer());
     }
@@ -49,7 +56,8 @@ public class PacketCodeC {
         Class<? extends Packet> packetClazz = this.getCommand(command);
 
         if (serializer != null && packetClazz != null) {
-            return serializer.deserialize(packetClazz, content);
+            Packet deserialize = serializer.deserialize(packetClazz, content);
+            return deserialize;
         }
         return null;
     }
