@@ -2,7 +2,6 @@ package com.guo.springboot.netty.v2.server.handler;
 
 import com.guo.springboot.netty.v2.request.MessageRequestPacket;
 import com.guo.springboot.netty.v2.response.MessageResponsePacket;
-import com.sun.org.apache.regexp.internal.RE;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
