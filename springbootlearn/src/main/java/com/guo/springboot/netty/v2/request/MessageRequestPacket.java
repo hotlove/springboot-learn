@@ -10,9 +10,12 @@ import com.guo.springboot.netty.v2.serialize.Packet;
  */
 public class MessageRequestPacket extends Packet {
 
+    private String toUserId;
+
     private String msg;
 
-    public MessageRequestPacket(String msg) {
+    public MessageRequestPacket(String toUserId, String msg) {
+        this.toUserId = toUserId;
         this.msg = msg;
     }
 

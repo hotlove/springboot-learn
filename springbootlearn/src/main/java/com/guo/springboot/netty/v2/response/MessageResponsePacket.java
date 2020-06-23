@@ -10,6 +10,8 @@ import com.guo.springboot.netty.v2.serialize.Packet;
  */
 public class MessageResponsePacket extends Packet {
 
+    private String fromUserId;
+
     private String msg;
 
     public String getMsg() {
@@ -18,6 +20,14 @@ public class MessageResponsePacket extends Packet {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public String getFromUserId() {
+        return fromUserId;
+    }
+
+    public void setFromUserId(String fromUserId) {
+        this.fromUserId = fromUserId;
     }
 
     @Override
