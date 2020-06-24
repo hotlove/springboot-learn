@@ -2,6 +2,7 @@ package com.guo.springboot.netty.v2.serialize;
 
 import com.guo.springboot.netty.v2.command.Command;
 import com.guo.springboot.netty.v2.request.LoginRequestPacket;
+import com.guo.springboot.netty.v2.request.LogoutRequestPacket;
 import com.guo.springboot.netty.v2.request.MessageRequestPacket;
 import com.guo.springboot.netty.v2.response.LoginResponsePacket;
 import com.guo.springboot.netty.v2.response.MessageResponsePacket;
@@ -25,6 +26,7 @@ public class PacketCodeC {
         packetMap.put(Command.LOGIN_RESPONSE, LoginResponsePacket.class);
         packetMap.put(Command.MESSAGE_REQUEST, MessageRequestPacket.class);
         packetMap.put(Command.MESSAGE_RESPONSE, MessageResponsePacket.class);
+        packetMap.put(Command.LOGOUT_REQUEST, LogoutRequestPacket.class);
 
         serializerMap.put(SerializerAlogrithm.KYRO, new KyroSerializer());
     }
