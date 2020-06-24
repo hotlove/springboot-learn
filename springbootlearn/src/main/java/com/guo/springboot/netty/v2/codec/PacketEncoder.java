@@ -10,7 +10,6 @@ public class PacketEncoder extends MessageToByteEncoder<Packet> {
 
     @Override
     protected void encode(ChannelHandlerContext channelHandlerContext, Packet packet, ByteBuf byteBuf) throws Exception {
-        System.out.println("调用了编码了------------------------");
         PacketCodeC.INSTANCE.encode(byteBuf, packet);
     }
 }

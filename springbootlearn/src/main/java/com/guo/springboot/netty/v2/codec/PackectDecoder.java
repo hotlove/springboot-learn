@@ -10,7 +10,6 @@ import java.util.List;
 public class PackectDecoder extends ByteToMessageDecoder {
     @Override
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
-        System.out.println("调用解码了------------------------");
         list.add(PacketCodeC.INSTANCE.decode(byteBuf));
     }
 }

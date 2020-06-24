@@ -5,6 +5,7 @@ import com.guo.springboot.netty.v2.codec.PacketEncoder;
 import com.guo.springboot.netty.v2.serialize.Spliter;
 import com.guo.springboot.netty.v2.server.handler.FirstServerHandler;
 import com.guo.springboot.netty.v2.server.handler.LoginRequestHandler;
+import com.guo.springboot.netty.v2.server.handler.LogoutRequestHandler;
 import com.guo.springboot.netty.v2.server.handler.MessageRequestHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelHandler;
@@ -36,6 +37,7 @@ public class NettyServer {
                                 .addLast(new PackectDecoder())
                                 .addLast(new LoginRequestHandler())
                                 .addLast(new MessageRequestHandler())
+                                .addLast(new LogoutRequestHandler())
                                 .addLast(new PacketEncoder());
                     }
                 });

@@ -1,10 +1,12 @@
 package com.guo.springboot.netty.v2.client;
 
+import com.guo.springboot.netty.v2.client.handler.GlobalHandler;
 import com.guo.springboot.netty.v2.client.handler.LoginResponseHanlder;
 import com.guo.springboot.netty.v2.client.handler.MessageResponseHandler;
 import com.guo.springboot.netty.v2.codec.PackectDecoder;
 import com.guo.springboot.netty.v2.codec.PacketEncoder;
 import com.guo.springboot.netty.v2.request.LoginRequestPacket;
+import com.guo.springboot.netty.v2.request.LogoutRequestPacket;
 import com.guo.springboot.netty.v2.request.MessageRequestPacket;
 import com.guo.springboot.netty.v2.serialize.Spliter;
 import com.guo.springboot.netty.v2.util.LoginUtil;
@@ -17,6 +19,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 
+import javax.crypto.MacSpi;
 import java.util.Scanner;
 
 public class NettyClient {
@@ -34,6 +37,7 @@ public class NettyClient {
 //                                .addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 7, 4)) // Integer.MAX_VALUE内容最大长度, 7是协议前面那些固定长度的字节数，4是存储内容长度的字节数
                                 .addLast(new Spliter())
                                 .addLast(new PackectDecoder())
+                                .addLast(new GlobalHandler())
                                 .addLast(new LoginResponseHanlder())
                                 .addLast(new MessageResponseHandler())
                                 .addLast(new PacketEncoder());
@@ -78,10 +82,13 @@ public class NettyClient {
                     }
                 } else {
                     System.out.println("输入消息:");
-                    String toUserId = sc.next();
                     String message = sc.next();
-
-                    channel.writeAndFlush(new MessageRequestPacket(toUserId, message));
+                    if (message.trim().equals("exit")) {
+                        channel.writeAndFlush(new LogoutRequestPacket());
+                    } else {
+                        String toUserId = sc.next();
+                        channel.writeAndFlush(new MessageRequestPacket(toUserId, message));
+                    }
                 }
             }
         }).start();

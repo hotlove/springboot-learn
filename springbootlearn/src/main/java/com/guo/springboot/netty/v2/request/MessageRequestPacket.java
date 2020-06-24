@@ -19,6 +19,14 @@ public class MessageRequestPacket extends Packet {
         this.msg = msg;
     }
 
+    public String getToUserId() {
+        return toUserId;
+    }
+
+    public void setToUserId(String toUserId) {
+        this.toUserId = toUserId;
+    }
+
     public String getMsg() {
         return msg;
     }
