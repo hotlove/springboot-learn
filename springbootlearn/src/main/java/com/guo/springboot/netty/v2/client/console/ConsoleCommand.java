@@ -14,5 +14,7 @@ public interface ConsoleCommand {
 
     String SEND_MSG_GROUP = "sendGroup"; // 发送消息给群组
 
+    String CREATE_GROUP = "createGroup"; // 创建群组
+
     void exec(Scanner scanner, Channel channel);
 }

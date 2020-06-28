@@ -1,23 +1,24 @@
 package com.guo.springboot.netty.v2.request;
 
+import com.guo.springboot.netty.v2.command.Command;
 import com.guo.springboot.netty.v2.serialize.Packet;
 
 import java.util.List;
 
 public class CreateGroupRequestPacket extends Packet {
 
-    private List<String> userIds;
+    private String userIds;
 
-    public List<String> getUserIds() {
+    public String getUserIds() {
         return userIds;
     }
 
-    public void setUserIds(List<String> userIds) {
+    public void setUserIds(String userIds) {
         this.userIds = userIds;
     }
 
     @Override
     public Byte getCommand() {
-        return null;
+        return Command.CREATE_GROUP_REQUEST;
     }
 }

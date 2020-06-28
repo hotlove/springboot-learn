@@ -6,7 +6,7 @@ import com.guo.springboot.netty.v2.util.LoginUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
-public class LoginResponseHanlder extends SimpleChannelInboundHandler<LoginResponsePacket> {
+public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginResponsePacket> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginResponsePacket msg) throws Exception {

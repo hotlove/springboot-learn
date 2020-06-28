@@ -2,14 +2,12 @@ package com.guo.springboot.netty.v2.client;
 
 import com.guo.springboot.netty.v2.client.console.ConsoleCommandManager;
 import com.guo.springboot.netty.v2.client.console.LoginConsoleCommand;
+import com.guo.springboot.netty.v2.client.handler.CreateGroupResponseHandler;
 import com.guo.springboot.netty.v2.client.handler.GlobalHandler;
-import com.guo.springboot.netty.v2.client.handler.LoginResponseHanlder;
+import com.guo.springboot.netty.v2.client.handler.LoginResponseHandler;
 import com.guo.springboot.netty.v2.client.handler.MessageResponseHandler;
 import com.guo.springboot.netty.v2.codec.PackectDecoder;
 import com.guo.springboot.netty.v2.codec.PacketEncoder;
-import com.guo.springboot.netty.v2.request.LoginRequestPacket;
-import com.guo.springboot.netty.v2.request.LogoutRequestPacket;
-import com.guo.springboot.netty.v2.request.MessageRequestPacket;
 import com.guo.springboot.netty.v2.serialize.Spliter;
 import com.guo.springboot.netty.v2.util.LoginUtil;
 import io.netty.bootstrap.Bootstrap;
@@ -19,9 +17,7 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 
-import javax.crypto.MacSpi;
 import java.util.Scanner;
 
 public class NettyClient {
@@ -40,8 +36,9 @@ public class NettyClient {
                                 .addLast(new Spliter())
                                 .addLast(new PackectDecoder())
                                 .addLast(new GlobalHandler())
-                                .addLast(new LoginResponseHanlder())
+                                .addLast(new LoginResponseHandler())
                                 .addLast(new MessageResponseHandler())
+                                .addLast(new CreateGroupResponseHandler())
                                 .addLast(new PacketEncoder());
                     }
                 });

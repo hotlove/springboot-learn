@@ -3,10 +3,7 @@ package com.guo.springboot.netty.v2.server;
 import com.guo.springboot.netty.v2.codec.PackectDecoder;
 import com.guo.springboot.netty.v2.codec.PacketEncoder;
 import com.guo.springboot.netty.v2.serialize.Spliter;
-import com.guo.springboot.netty.v2.server.handler.FirstServerHandler;
-import com.guo.springboot.netty.v2.server.handler.LoginRequestHandler;
-import com.guo.springboot.netty.v2.server.handler.LogoutRequestHandler;
-import com.guo.springboot.netty.v2.server.handler.MessageRequestHandler;
+import com.guo.springboot.netty.v2.server.handler.*;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelInitializer;
@@ -37,6 +34,7 @@ public class NettyServer {
                                 .addLast(new PackectDecoder())
                                 .addLast(new LoginRequestHandler())
                                 .addLast(new MessageRequestHandler())
+                                .addLast(new CreateGroupRequestHandler())
                                 .addLast(new LogoutRequestHandler())
                                 .addLast(new PacketEncoder());
                     }
