@@ -7,6 +7,8 @@ import com.guo.springboot.netty.v2.util.SessionUtil;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.group.ChannelGroup;
+import io.netty.channel.group.DefaultChannelGroup;
 
 /**
  * @Auther: hotlove_linx
@@ -37,7 +39,8 @@ public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRe
             // 如果对方不在线
             messageResponsePacket.setMsg("对方不在线");
         }
-
+        ChannelGroup channelGroup = new DefaultChannelGroup(channelHandlerContext.executor());
+//        channelGroup.
         toChannel.writeAndFlush(messageResponsePacket);
 
     }

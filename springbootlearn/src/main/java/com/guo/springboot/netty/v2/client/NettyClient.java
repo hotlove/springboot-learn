@@ -1,5 +1,7 @@
 package com.guo.springboot.netty.v2.client;
 
+import com.guo.springboot.netty.v2.client.console.ConsoleCommandManager;
+import com.guo.springboot.netty.v2.client.console.LoginConsoleCommand;
 import com.guo.springboot.netty.v2.client.handler.GlobalHandler;
 import com.guo.springboot.netty.v2.client.handler.LoginResponseHanlder;
 import com.guo.springboot.netty.v2.client.handler.MessageResponseHandler;
@@ -59,36 +61,15 @@ public class NettyClient {
 
     private static void startConsoleThread(Channel channel) {
         Scanner sc = new Scanner(System.in);
-        LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
+        LoginConsoleCommand loginConsoleCommand = new LoginConsoleCommand();
+        ConsoleCommandManager consoleCommandManager = new ConsoleCommandManager();
         new Thread(() -> {
             while (!Thread.interrupted()) {
-
                 if (!LoginUtil.hasLogin(channel)) {
                     // 如果未登录则进行登录
-                    System.out.println("用户名:");
-                    String userName = sc.next();
-                    System.out.println("密码:");
-                    String password = sc.next();
-
-                    loginRequestPacket.setUserName(userName);
-                    loginRequestPacket.setPassword(password);
-
-                    channel.writeAndFlush(loginRequestPacket);
-                    // 模拟登录1s
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    loginConsoleCommand.exec(sc, channel);
                 } else {
-                    System.out.println("输入消息:");
-                    String message = sc.next();
-                    if (message.trim().equals("exit")) {
-                        channel.writeAndFlush(new LogoutRequestPacket());
-                    } else {
-                        String toUserId = sc.next();
-                        channel.writeAndFlush(new MessageRequestPacket(toUserId, message));
-                    }
+                    consoleCommandManager.exec(sc, channel);
                 }
             }
         }).start();
