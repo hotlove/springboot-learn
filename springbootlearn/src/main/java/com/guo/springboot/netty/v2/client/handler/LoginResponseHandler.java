@@ -1,6 +1,5 @@
 package com.guo.springboot.netty.v2.client.handler;
 
-import com.guo.springboot.netty.attribute.Attributes;
 import com.guo.springboot.netty.v2.response.LoginResponsePacket;
 import com.guo.springboot.netty.v2.util.LoginUtil;
 import io.netty.channel.ChannelHandlerContext;

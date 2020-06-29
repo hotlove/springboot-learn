@@ -2,10 +2,7 @@ package com.guo.springboot.netty.v2.client;
 
 import com.guo.springboot.netty.v2.client.console.ConsoleCommandManager;
 import com.guo.springboot.netty.v2.client.console.LoginConsoleCommand;
-import com.guo.springboot.netty.v2.client.handler.CreateGroupResponseHandler;
-import com.guo.springboot.netty.v2.client.handler.GlobalHandler;
-import com.guo.springboot.netty.v2.client.handler.LoginResponseHandler;
-import com.guo.springboot.netty.v2.client.handler.MessageResponseHandler;
+import com.guo.springboot.netty.v2.client.handler.*;
 import com.guo.springboot.netty.v2.codec.PackectDecoder;
 import com.guo.springboot.netty.v2.codec.PacketEncoder;
 import com.guo.springboot.netty.v2.serialize.Spliter;
@@ -39,6 +36,7 @@ public class NettyClient {
                                 .addLast(new LoginResponseHandler())
                                 .addLast(new MessageResponseHandler())
                                 .addLast(new CreateGroupResponseHandler())
+                                .addLast(new GroupMessageResponseHandler())
                                 .addLast(new PacketEncoder());
                     }
                 });

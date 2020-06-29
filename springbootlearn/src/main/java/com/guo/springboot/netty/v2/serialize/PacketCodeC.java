@@ -1,11 +1,9 @@
 package com.guo.springboot.netty.v2.serialize;
 
 import com.guo.springboot.netty.v2.command.Command;
-import com.guo.springboot.netty.v2.request.CreateGroupRequestPacket;
-import com.guo.springboot.netty.v2.request.LoginRequestPacket;
-import com.guo.springboot.netty.v2.request.LogoutRequestPacket;
-import com.guo.springboot.netty.v2.request.MessageRequestPacket;
+import com.guo.springboot.netty.v2.request.*;
 import com.guo.springboot.netty.v2.response.CreateGroupResponsePacket;
+import com.guo.springboot.netty.v2.response.GroupMessageResponsePacket;
 import com.guo.springboot.netty.v2.response.LoginResponsePacket;
 import com.guo.springboot.netty.v2.response.MessageResponsePacket;
 import io.netty.buffer.ByteBuf;
@@ -31,6 +29,8 @@ public class PacketCodeC {
         packetMap.put(Command.LOGOUT_REQUEST, LogoutRequestPacket.class);
         packetMap.put(Command.CREATE_GROUP_REQUEST, CreateGroupRequestPacket.class);
         packetMap.put(Command.CREATE_GROUP_RESPONSE, CreateGroupResponsePacket.class);
+        packetMap.put(Command.GROUP_MESSAGE_REQUEST, GroupMessageRequestPacket.class);
+        packetMap.put(Command.GROUP_MESSAGE_RESPONSE, GroupMessageResponsePacket.class);
 
         serializerMap.put(SerializerAlogrithm.KYRO, new KyroSerializer());
     }
