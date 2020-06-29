@@ -18,4 +18,8 @@ public interface Command {
     Byte GROUP_MESSAGE_REQUEST = 8;
 
     Byte GROUP_MESSAGE_RESPONSE = 9;
+
+    Byte HEART_BEART_REQUEST = 10;
+
+    Byte HEART_BEART_RESPONSE = 11;
 }

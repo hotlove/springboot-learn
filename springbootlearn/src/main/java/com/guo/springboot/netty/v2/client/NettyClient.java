@@ -6,6 +6,7 @@ import com.guo.springboot.netty.v2.client.handler.*;
 import com.guo.springboot.netty.v2.codec.PackectDecoder;
 import com.guo.springboot.netty.v2.codec.PacketEncoder;
 import com.guo.springboot.netty.v2.serialize.Spliter;
+import com.guo.springboot.netty.v2.server.handler.IMIdleStateHandler;
 import com.guo.springboot.netty.v2.util.LoginUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -30,6 +31,8 @@ public class NettyClient {
                     protected void initChannel(SocketChannel ch) throws Exception {
                         ch.pipeline()
 //                                .addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 7, 4)) // Integer.MAX_VALUE内容最大长度, 7是协议前面那些固定长度的字节数，4是存储内容长度的字节数
+                                // 这里客户端的逻辑和服务端一样
+                                .addLast(new IMIdleStateHandler())
                                 .addLast(new Spliter())
                                 .addLast(new PackectDecoder())
                                 .addLast(new GlobalHandler())
@@ -37,7 +40,9 @@ public class NettyClient {
                                 .addLast(new MessageResponseHandler())
                                 .addLast(new CreateGroupResponseHandler())
                                 .addLast(new GroupMessageResponseHandler())
-                                .addLast(new PacketEncoder());
+                                .addLast(new PacketEncoder())
+                                .addLast(new HeartBeatTimerHandler());
+
                     }
                 });
 
