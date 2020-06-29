@@ -1,17 +1,14 @@
 package com.guo.springboot.netty.v2.server;
 
-import com.guo.springboot.netty.v2.codec.PackectDecoder;
 import com.guo.springboot.netty.v2.codec.PacketCodecHandler;
-import com.guo.springboot.netty.v2.codec.PacketEncoder;
 import com.guo.springboot.netty.v2.serialize.Spliter;
-import com.guo.springboot.netty.v2.server.handler.*;
+import com.guo.springboot.netty.v2.server.handler.IMHandler;
+import com.guo.springboot.netty.v2.server.handler.LoginRequestHandler;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 
