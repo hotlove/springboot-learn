@@ -1,0 +1,42 @@
+Bootstrap.channel方法进入
+=>(1-1) io.netty.bootstrap.AbstractBootstrap#channel
+        1.channelFactory(new ReflectiveChannelFactory<C>(channelClass));通过这行代码创建channlefactory  channelClass就是NioServerSocketChannel.class
+
+    =>(1-2) io.netty.channel.ReflectiveChannelFactory#ReflectiveChannelFactory   
+            1.构造函数将配置的NioServerSocketChannel.class文件复制给内部变量clazz 后期会通过反射new 出NioServerSocketChannel
+            2.ReflectiveChannelFactory实现了ChannelFactory接口 实现了newChannel()后期会调用创建NioServerSocketChannel[对象]clazz.getConstructor().newInstance();
+
+        =>(1-3) io.netty.bootstrap.AbstractBootstrap#channelFactory(io.netty.channel.ChannelFactory<? extends C>)
+                1.channelFactory((ChannelFactory<C>) channelFactory)调用此方法
+
+            =>(1-4) io.netty.bootstrap.AbstractBootstrap#channelFactory(io.netty.bootstrap.ChannelFactory<? extends C>)
+                    1.将上步生成的channelFactory赋值给成员变量channelFactory
+
+ 创建NioServerSocketChannel对象                 
+=> io.netty.channel.socket.nio.NioServerSocketChannel#NioServerSocketChannel()
+    => io.netty.channel.socket.nio.NioServerSocketChannel#newSocket
+        1.调用底层provider.openServerSocketChannel(); 获取ServerSocketChannel对象 用于下面构造函数使用
+=> io.netty.channel.socket.nio.NioServerSocketChannel#NioServerSocketChannel(java.nio.channels.ServerSocketChannel)
+    => io.netty.channel.nio.AbstractNioMessageChannel#AbstractNioMessageChannel
+        => io.netty.channel.nio.AbstractNioChannel#AbstractNioChannel
+            => io.netty.channel.AbstractChannel#AbstractChannel(io.netty.channel.Channel)
+                1.this.parent = parent; 将channel[这里其实为null] 赋值给成员变量
+                2.设置channelId
+                3.设置unsafe
+                4.创建DefaultChannelPipeline赋值给成员变量private final DefaultChannelPipeline pipeline;
+                => io.netty.channel.AbstractChannel#newChannelPipeline
+                    => io.netty.channel.DefaultChannelPipeline#DefaultChannelPipeline
+                        1.设置futrue
+                        2.设置promise
+                        3.设置成员变量head:AbstractChannelHandlerContext[相当于一个handler类型] tail:AbstractChannelHandlerContext
+                        DefaultChannelPipeline管理了一个链表 这个链表类型为AbstractChannelHandlerContext
+
+通过bind方法进行追踪
+=>(2-1) io.netty.bootstrap.AbstractBootstrap#bind(int)
+    =>(2-2) io.netty.bootstrap.AbstractBootstrap#bind(java.net.SocketAddress)
+        =>(2-3 )io.netty.bootstrap.AbstractBootstrap#doBind
+            =>(2-4) io.netty.bootstrap.AbstractBootstrap#initAndRegister
+                1.channel = channelFactory.newChannel(); 这一步调用之前AbstractBootstrap配置的内部channelFactory 调用newChannel [见1-2]
+
+                =>(2-5) io.netty.bootstrap.ServerBootstrap#init
+                        1.设置普通的属性
