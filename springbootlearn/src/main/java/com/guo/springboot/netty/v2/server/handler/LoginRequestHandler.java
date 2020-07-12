@@ -5,12 +5,17 @@ import com.guo.springboot.netty.v2.request.LoginRequestPacket;
 import com.guo.springboot.netty.v2.response.LoginResponsePacket;
 import com.guo.springboot.netty.v2.util.Session;
 import com.guo.springboot.netty.v2.util.SessionUtil;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 import java.util.UUID;
 
+@ChannelHandler.Sharable
 public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginRequestPacket> {
+
+    public static final LoginRequestHandler INSTANCE = new LoginRequestHandler();
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginRequestPacket msg) throws Exception {
 

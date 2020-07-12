@@ -6,6 +6,7 @@ import io.netty.channel.group.ChannelGroup;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.PriorityBlockingQueue;
 
 /**
  * @Auther: hotlove_linx
@@ -56,6 +57,10 @@ public class SessionUtil {
         if (channelGroupMap.containsKey(groupId)) {
             channelGroupMap.remove(groupId);
         }
+    }
+
+    public static ChannelGroup getChannelGroup(String groupId) {
+        return channelGroupMap.get(groupId);
     }
 
     public static boolean hasLogin(Channel channel) {

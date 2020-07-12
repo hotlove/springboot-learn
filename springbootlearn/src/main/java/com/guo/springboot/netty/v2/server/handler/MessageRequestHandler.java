@@ -5,6 +5,7 @@ import com.guo.springboot.netty.v2.response.MessageResponsePacket;
 import com.guo.springboot.netty.v2.util.Session;
 import com.guo.springboot.netty.v2.util.SessionUtil;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
@@ -15,7 +16,11 @@ import io.netty.channel.group.DefaultChannelGroup;
  * @Date: 2020/6/22 22:34
  * @Description:
  */
+@ChannelHandler.Sharable
 public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRequestPacket> {
+
+    public static final MessageRequestHandler INSTANCE = new MessageRequestHandler();
+
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, MessageRequestPacket messageRequestPacket) throws Exception {
 

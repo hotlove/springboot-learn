@@ -1,16 +1,16 @@
 package com.guo.springboot.netty.v2.server;
 
-import com.guo.springboot.netty.v2.codec.PackectDecoder;
-import com.guo.springboot.netty.v2.codec.PacketEncoder;
+import com.guo.springboot.netty.v2.codec.PacketCodecHandler;
 import com.guo.springboot.netty.v2.serialize.Spliter;
-import com.guo.springboot.netty.v2.server.handler.*;
+import com.guo.springboot.netty.v2.server.handler.HeartBeatRequestHandler;
+import com.guo.springboot.netty.v2.server.handler.IMHandler;
+import com.guo.springboot.netty.v2.server.handler.IMIdleStateHandler;
+import com.guo.springboot.netty.v2.server.handler.LoginRequestHandler;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 
@@ -27,16 +27,22 @@ public class NettyServer {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
-//                        nioSocketChannel.pipeline().addLast(new FirstServerHandler());
                         nioSocketChannel.pipeline()
-//                                .addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 7, 4)) // Integer.MAX_VALUE内容最大长度, 7是协议前面那些固定长度的字节数，4是存储内容长度的字节数
+                                // 服务端心跳检测
+                                .addLast(new IMIdleStateHandler())
                                 .addLast(new Spliter())
-                                .addLast(new PackectDecoder())
-                                .addLast(new LoginRequestHandler())
-                                .addLast(new MessageRequestHandler())
-                                .addLast(new CreateGroupRequestHandler())
-                                .addLast(new LogoutRequestHandler())
-                                .addLast(new PacketEncoder());
+//                                .addLast(new PackectDecoder())
+                                // Netty 内部提供了一个类，叫做 MessageToMessageCodec，使用它可以让我们的编解码操作放到一个类里面去实现
+                                .addLast(PacketCodecHandler.INSTANCE)
+                                // ...单例模式，多个 channel 共享同一个 handler
+                                .addLast(LoginRequestHandler.INSTANCE)
+                                .addLast(HeartBeatRequestHandler.INSTANCE)
+                                .addLast(IMHandler.INSTANCE);
+//                                .addLast(new MessageRequestHandler())
+//                                .addLast(new CreateGroupRequestHandler())
+//                                .addLast(new GroupMessageRequestHandler())
+//                                .addLast(new LogoutRequestHandler());
+//                                .addLast(new PacketEncoder());
                     }
                 });
 
