@@ -16,17 +16,22 @@ import java.util.Locale;
  * @Description:
  */
 public class WebSocketFrameHandler extends SimpleChannelInboundHandler<WebSocketFrame> {
+
+    private final String HEART_BEAT = "HeartBeat";
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, WebSocketFrame frame) throws Exception {
+
         if (frame instanceof TextWebSocketFrame) {
-            System.out.println("接收消息。。。。。。。。。。。。。");
-            // Send the uppercase string back.
-            String request = ((TextWebSocketFrame) frame).text();
-            ctx.channel().writeAndFlush(new TextWebSocketFrame(request.toUpperCase(Locale.US)));
-        } if (frame instanceof PingWebSocketFrame) {
-            System.out.println("ping/pong msg...................");
-            ctx.channel().write(new PongWebSocketFrame(frame.content().retain()));
-            return;
+            TextWebSocketFrame textWebSocketFrame = (TextWebSocketFrame)frame;
+            String content = textWebSocketFrame.text();
+            System.out.println("收到来自客户端消息:"+ content);
+
+            if (HEART_BEAT.equals(content)) {
+                // 心跳检测包 直接写会
+                ctx.channel().writeAndFlush(new TextWebSocketFrame(HEART_BEAT));
+            }
+
         } else {
             String message = "unsupported frame type: " + frame.getClass().getName();
             System.out.println(message);

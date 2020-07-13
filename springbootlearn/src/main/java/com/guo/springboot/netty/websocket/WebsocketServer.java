@@ -40,6 +40,7 @@ public class WebsocketServer {
                                     .addLast(new HttpObjectAggregator(65536))
                                     .addLast(new WebSocketServerCompressionHandler())
                                     .addLast(new WebSocketServerProtocolHandler(WEBSOCKET_PATH, null, true))
+                                    .addLast(new WsIdleStateHandler()) // 心跳
                                     .addLast(new WebSocketFrameHandler());
                         }
                     });
