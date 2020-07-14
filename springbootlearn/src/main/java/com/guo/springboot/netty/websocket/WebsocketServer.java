@@ -1,5 +1,6 @@
 package com.guo.springboot.netty.websocket;
 
+import com.guo.springboot.netty.websocket.handler.PacketCodecHanlder;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -42,6 +43,7 @@ public class WebsocketServer {
                                     .addLast(new WebSocketServerProtocolHandler(WEBSOCKET_PATH, null, true))
                                     .addLast(new WsIdleStateHandler()) // 心跳
                                     .addLast(new WebSocketFrameHandler());
+//                                    .addLast(new PacketCodecHanlder());
                         }
                     });
             Channel channel = serverBootstrap.bind(port).sync().channel();

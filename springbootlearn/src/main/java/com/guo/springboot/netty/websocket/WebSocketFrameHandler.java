@@ -30,6 +30,8 @@ public class WebSocketFrameHandler extends SimpleChannelInboundHandler<WebSocket
             if (HEART_BEAT.equals(content)) {
                 // 心跳检测包 直接写会
                 ctx.channel().writeAndFlush(new TextWebSocketFrame(HEART_BEAT));
+            } else {
+                ctx.channel().writeAndFlush(new TextWebSocketFrame("123"));
             }
 
         } else {
