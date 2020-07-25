@@ -24,7 +24,7 @@ public class RocketMqConsumer {
         consumer.setNamesrvAddr("47.99.145.78:9876");
 
         // Subscribe one more more topics to consume.
-        consumer.subscribe("mytopic", "*");
+        consumer.subscribe("TestTopic", "*");
         // Register callback to execute on arrival of messages fetched from brokers.
         consumer.registerMessageListener(new MessageListenerConcurrently() {
 
