@@ -26,7 +26,7 @@ public class Producer {
                 "Topic_Demo", // 主题
                 "tags", // 标签 主要用于过滤消息
                 "keys", // 消息对应的唯一值 定位消息
-                "hello".getBytes(RemotingHelper.DEFAULT_CHARSET)
+                "hello12".getBytes(RemotingHelper.DEFAULT_CHARSET)
         );
         // 5.发送消息
         SendResult sendResult = defaultMQProducer.send(message);
