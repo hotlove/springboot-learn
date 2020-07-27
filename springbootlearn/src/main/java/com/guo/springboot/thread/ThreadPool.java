@@ -1,7 +1,8 @@
 package com.guo.springboot.thread;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 /**
  * @Date: 2020/7/22 15:30
@@ -16,5 +17,9 @@ public class ThreadPool {
         executorService.execute(() -> {
             System.out.println("test");
         });
+        ThreadPoolExecutor threadPoolExecutor =
+                new ThreadPoolExecutor(1,1, 1, SECONDS, new LinkedBlockingDeque<>());
+
+        threadPoolExecutor.prestartAllCoreThreads();
     }
 }
