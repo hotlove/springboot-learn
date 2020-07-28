@@ -1,4 +1,4 @@
-package com.guo.springboot.mq;
+package com.guo.springboot.mq.rocketmq.quickstart;
 
 import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
