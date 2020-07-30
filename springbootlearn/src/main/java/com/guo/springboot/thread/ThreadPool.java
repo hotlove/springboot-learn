@@ -1,6 +1,8 @@
 package com.guo.springboot.thread;
 
+import javax.sound.midi.Soundbank;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
@@ -17,19 +19,67 @@ public class ThreadPool {
 //        executorService.execute(() -> {
 //            System.out.println("test");
 //        });
-//        ThreadPoolExecutor threadPoolExecutor =
-//                new ThreadPoolExecutor(4, 5, 1, SECONDS, new LinkedBlockingDeque<>(), new ThreadFactory() {
-//                    @Override
-//                    public Thread newThread(Runnable r) {
-//                        Thread thread = new Thread(r,"test-thread");
-//                        thread.start();
-//                        return thread;
-//                    }
-//                });
-//
-//        int i = threadPoolExecutor.prestartAllCoreThreads();
-//        System.out.println(i);
-        testDelayQuene();
+        AtomicInteger i = new AtomicInteger();
+        ThreadPoolExecutor threadPoolExecutor =
+                new ThreadPoolExecutor(2, 4, 1, SECONDS, new LinkedBlockingDeque<>(7), new ThreadFactory() {
+                    @Override
+                    public Thread newThread(Runnable r) {
+                        String name = "test-thread-"+i.incrementAndGet();
+                        System.out.println(name);
+                        Thread thread = new Thread(r,name);
+                        return thread;
+                    }
+                });
+
+        for (int ix = 0; ix < 10; ix++) {
+            threadPoolExecutor.execute(() -> {
+                try {
+                    SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+        System.out.println(threadPoolExecutor.getActiveCount());
+        new Thread(() -> {
+            while (true) {
+                System.out.println("活动线程数"+threadPoolExecutor.getActiveCount());
+                System.out.println("最大线程数"+threadPoolExecutor.getMaximumPoolSize());
+                try {
+                    SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+//        testDelayQuene();
+//        testCacheThread();
+    }
+
+    private static AtomicInteger index = new AtomicInteger();
+    public static void testCacheThread() {
+        ExecutorService executorService = Executors.newCachedThreadPool(new ThreadFactory() {
+            @Override
+            public Thread newThread(Runnable r) {
+                System.out.println(index.incrementAndGet());
+                String threadName = "cached thread-"+index;
+                System.out.println(threadName);
+                Thread thread = new Thread(r, threadName);
+                return thread;
+            }
+        });
+
+        for (int i = 0; i < 10; i++) {
+            executorService.execute(() -> {
+                try {
+                    System.out.println("test--------------");
+                    SECONDS.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+
     }
 
     public static void testDelayQuene() throws InterruptedException {
@@ -44,6 +94,7 @@ public class ThreadPool {
         }
     }
 
+    // 延迟队列的任务必须要实现delayed接口
     static class DelayTask implements Delayed {
 
         private long time;
