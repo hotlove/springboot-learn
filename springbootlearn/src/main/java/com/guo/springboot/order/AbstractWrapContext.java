@@ -7,6 +7,7 @@ package com.guo.springboot.order;
  * @Description:
  */
 public abstract class AbstractWrapContext {
+
     public Object content;
 
     public abstract Object getContent();

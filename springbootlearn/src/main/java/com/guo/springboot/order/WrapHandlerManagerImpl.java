@@ -6,7 +6,7 @@ package com.guo.springboot.order;
  * @Since JDK 1.8
  * @Description:
  */
-public class OrderWrapHandlerManager implements WrapHandlerManager {
+public class WrapHandlerManagerImpl implements WrapHandlerManager {
 
     protected WrapNode head;
 
@@ -14,7 +14,7 @@ public class OrderWrapHandlerManager implements WrapHandlerManager {
 
     public AbstractWrapContext context;
 
-    public OrderWrapHandlerManager() {
+    public WrapHandlerManagerImpl() {
         this.head = new WrapNode();
         this.tail = new WrapNode();
 

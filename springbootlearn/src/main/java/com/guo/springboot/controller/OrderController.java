@@ -29,7 +29,7 @@ public class OrderController {
         AbstractWrapContext abstractWrapContext = new OrderContext();
         abstractWrapContext.setContent(list);
 
-        WrapHandlerManager wrapHandlerManager = new OrderWrapHandlerManager();
+        WrapHandlerManager wrapHandlerManager = new WrapHandlerManagerImpl();
         AbstractWrapContext context = wrapHandlerManager.setContext(abstractWrapContext)
                 .addLast(new OrderBaseInfoWraperHandler())
                 .execute();

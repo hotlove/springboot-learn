@@ -16,7 +16,7 @@ public class WrapMain {
         AbstractWrapContext abstractWrapContext = new OrderContext();
         abstractWrapContext.setContent(testList);
 
-        WrapHandlerManager wrapHandlerManager = new OrderWrapHandlerManager();
+        WrapHandlerManager wrapHandlerManager = new WrapHandlerManagerImpl();
         wrapHandlerManager.setContext(abstractWrapContext)
                 .addLast(new WrapHandler() {
                     @Override
