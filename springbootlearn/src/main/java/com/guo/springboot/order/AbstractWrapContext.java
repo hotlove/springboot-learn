@@ -6,23 +6,10 @@ package com.guo.springboot.order;
  * @Since JDK 1.8
  * @Description:
  */
-public abstract class AbstractWrapContext implements WrapHandler{
+public abstract class AbstractWrapContext {
+    public Object content;
 
-    AbstractWrapContext prev;
+    public abstract Object getContent();
 
-    AbstractWrapContext next;
-
-    WrapHandler wrapHandler;
-
-    abstract void hireNext(AbstractWrapContext ctx);
-
-    private Object exteranlData;
-
-    public Object getExteranlData() {
-        return exteranlData;
-    }
-
-    public void setExteranlData(Object exteranlData) {
-        this.exteranlData = exteranlData;
-    }
+    public abstract void setContent(Object content);
 }
