@@ -37,4 +37,8 @@ public class OrderMain {
     public void setOrderNo(String orderNo) {
         this.orderNo = orderNo;
     }
+
+    public String toString() {
+        return orderNo + "-" +createdByName;
+    }
 }

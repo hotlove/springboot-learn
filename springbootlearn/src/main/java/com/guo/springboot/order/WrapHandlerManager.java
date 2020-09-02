@@ -6,5 +6,7 @@ public interface WrapHandlerManager {
 
     WrapHandlerManager addLast(WrapHandler wrapHandler);
 
+    WrapHandlerManager addParallelLast(WrapHandler wrapHandler);
+
     AbstractWrapContext execute();
 }

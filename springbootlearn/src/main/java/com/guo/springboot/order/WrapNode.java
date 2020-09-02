@@ -13,6 +13,16 @@ public class WrapNode implements WrapHandler{
 
     private WrapHandler wrapHandler;
 
+    private HandlerConfig handlerConfig;
+
+    public HandlerConfig getHandlerConfig() {
+        return handlerConfig;
+    }
+
+    public void setHandlerConfig(HandlerConfig handlerConfig) {
+        this.handlerConfig = handlerConfig;
+    }
+
     @Override
     public void handler(AbstractWrapContext ctx) {}
 

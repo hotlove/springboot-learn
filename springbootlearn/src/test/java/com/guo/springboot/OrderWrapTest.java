@@ -28,7 +28,10 @@ public class OrderWrapTest {
 
     @Test
     public void testOrderWrap() {
-        List<String> testList = new ArrayList<>();
+        List<OrderMain> testList = new ArrayList<>();
+        testList.add(new OrderMain());
+        testList.add(new OrderMain());
+        testList.add(new OrderMain());
 
         AbstractWrapContext abstractWrapContext = new OrderContext();
         abstractWrapContext.setContent(testList);
@@ -36,10 +39,12 @@ public class OrderWrapTest {
         WrapHandlerManager wrapHandlerManager = new WrapHandlerManagerImpl();
         wrapHandlerManager.setContext(abstractWrapContext)
                 .addLast(simpleOrderWrapHandler)
-                .addLast(simpleOrderWrapHandler2);
+                .addParallelLast(simpleOrderWrapHandler2);
 
         AbstractWrapContext execute = wrapHandlerManager.execute();
-        List<String> result = (List<String>) execute.getContent();
-        result.forEach(e -> System.out.println(e));
+        List<OrderMain> result = (List<OrderMain>) execute.getContent();
+        result.forEach(e -> {
+            System.out.println(e.getOrderNo()+"-"+e.getCreatedByName());
+        });
     }
 }
