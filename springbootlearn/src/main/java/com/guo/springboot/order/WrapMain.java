@@ -18,22 +18,18 @@ public class WrapMain {
 
         WrapHandlerManager wrapHandlerManager = new WrapHandlerManagerImpl();
         wrapHandlerManager.setContext(abstractWrapContext)
-                .addLast(new WrapHandler() {
+                .addLast(new SimpleWrapHandler<OrderContext>() {
                     @Override
-                    public void handler(AbstractWrapContext ctx) {
-                        if (ctx instanceof OrderContext) {
-
-                        }
-                        List<String> list = (List<String>) ctx.getContent();
-                        list.add("测试1");
+                    public void handler0(OrderContext ctx) {
+                        System.out.println("测试1");
                     }
-                }).addLast(new WrapHandler() {
-            @Override
-            public void handler(AbstractWrapContext ctx) {
-                List<String> list = (List<String>) ctx.getContent();
-                list.add("测试2");
-            }
-        });
+                })
+                .addLast(new SimpleWrapHandler<OrderContext>() {
+                    @Override
+                    public void handler0(OrderContext ctx) {
+                        System.out.println("测试2");
+                    }
+                });
 
         AbstractWrapContext execute = wrapHandlerManager.execute();
         List<String> result = (List<String>) execute.getContent();

@@ -15,20 +15,24 @@ import java.util.List;
  * @Since JDK 1.8
  * @Description:
  */
-public class OrderBaseInfoWraperHandler implements WrapHandler {
-
+public class OrderBaseInfoWraperHandler extends SimpleWrapHandler<OrderContext>{
     @Override
-    public void handler(AbstractWrapContext ctx) {
+    public void handler0(OrderContext ctx) {
 
-        ProfileMapper profileMapper = (ProfileMapper) AppContext.getBean("profileMapper");
-
-        if (ctx instanceof OrderContext) {
-            OrderContext orderContext = (OrderContext) ctx;
-            List<OrderMain> content = (List<OrderMain>) orderContext.content;
-            content.forEach(e -> {
-                Profile profile = profileMapper.selectByPrimaryKey(e.getCreatedById());
-                e.setCreatedByName(profile.getUsername());
-            });
-        }
     }
+
+//    @Override
+//    public void handler(AbstractWrapContext ctx) {
+//
+//        ProfileMapper profileMapper = (ProfileMapper) AppContext.getBean("profileMapper");
+//
+//        if (ctx instanceof OrderContext) {
+//            OrderContext orderContext = (OrderContext) ctx;
+//            List<OrderMain> content = (List<OrderMain>) orderContext.content;
+//            content.forEach(e -> {
+//                Profile profile = profileMapper.selectByPrimaryKey(e.getCreatedById());
+//                e.setCreatedByName(profile.getUsername());
+//            });
+//        }
+//    }
 }

@@ -1,19 +1,8 @@
 package com.guo.springboot.zookeeper;
 
-import com.alibaba.druid.filter.config.ConfigTools;
-import com.guo.springboot.orderenum.OrderEnum;
-import com.guo.springboot.redis.RedisUtil;
-import io.lettuce.core.RedisClient;
-import io.lettuce.core.RedisURI;
-import io.lettuce.core.api.StatefulRedisConnection;
-import io.lettuce.core.api.sync.RedisStringCommands;
-import io.lettuce.core.cluster.RedisClusterClient;
-import io.lettuce.core.cluster.api.StatefulRedisClusterConnection;
-import io.lettuce.core.cluster.api.sync.RedisAdvancedClusterCommands;
-import redis.clients.jedis.*;
+import redis.clients.jedis.Jedis;
 
 import java.io.IOException;
-import java.util.*;
 
 public class RedisTest {
 

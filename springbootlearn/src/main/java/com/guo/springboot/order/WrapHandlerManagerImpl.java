@@ -1,11 +1,15 @@
 package com.guo.springboot.order;
 
+import org.springframework.stereotype.Service;
+
 /**
  * @Date: 2020/8/28 16:48
  * @Author 郭乐建
  * @Since JDK 1.8
  * @Description:
  */
+
+@Service
 public class WrapHandlerManagerImpl implements WrapHandlerManager {
 
     protected WrapNode head;
