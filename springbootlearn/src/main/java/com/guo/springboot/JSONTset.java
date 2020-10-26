@@ -1,36 +1,64 @@
 package com.guo.springboot;
 
 import com.alibaba.fastjson.JSON;
-import javafx.scene.input.InputMethodTextRun;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.sound.midi.Soundbank;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class JSONTset {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
 
-        String content = "{\"nodes\":[{\"type\":\"node\",\"label\":\"堃堃的肾2\",\"shape\":\"NODE_ROOT\",\"size\":\"50*50\",\"x\":600,\"y\":150,\"form\":{\"itemId\":84,\"itemTitle\":\"堃堃的肾2\",\"itemType\":1,\"itemCode\":\"P12345679213\",\"imageUrl\":\"0ea22e6147ca414e895e13741e088397\",\"skuCode\":\"P12345679213001\",\"properties\":null,\"propertiesName\":\"\",\"itemCategoryName\":\"855555\",\"minUnitName\":\"个\"},\"color\":\"#c55a11\",\"index\":0,\"level\":0,\"leaf\":2,\"id\":\"7f41ad4c\"},{\"type\":\"node\",\"label\":\"测试物料\",\"shape\":\"NODE_CHILD\",\"size\":\"50*50\",\"x\":500,\"y\":300,\"form\":{\"nodeId\":\"\",\"itemTypeList\":\"3\",\"wasehouseId\":10,\"itemId\":90,\"itemTitle\":\"测试物料\",\"itemType\":\"\",\"itemCode\":\"P12345679238\",\"imageUrl\":\"\",\"skuCode\":\"P12345679238001\",\"skuId\":112,\"properties\":\"\",\"propertiesName\":\"\",\"itemCategoryName\":null,\"minUnitName\":\"个\",\"unitPercent\":1,\"attritionPercent\":1,\"remark\":\"\"},\"index\":1,\"level\":1,\"leaf\":2,\"color\":\"#1890FF\",\"id\":\"d1a9cf3b\"},{\"type\":\"node\",\"label\":\"测试得东西\",\"shape\":\"NODE_CHILD\",\"size\":\"50*50\",\"x\":700,\"y\":300,\"form\":{\"nodeId\":\"\",\"itemTypeList\":\"1,2\",\"wasehouseId\":10,\"itemId\":89,\"itemTitle\":\"测试得东西\",\"itemType\":\"\",\"itemCode\":\"P12345679233\",\"imageUrl\":\"\",\"skuCode\":\"P12345679233002\",\"skuId\":110,\"properties\":\"\",\"propertiesName\":\"sku1:2\",\"itemCategoryName\":null,\"minUnitName\":\"个\",\"unitPercent\":3,\"attritionPercent\":1,\"remark\":\"\",\"technologyId\":5},\"index\":3,\"level\":1,\"leaf\":1,\"color\":\"#1890FF\",\"id\":\"daccb00f\"},{\"type\":\"node\",\"label\":\"测试物流商品\",\"shape\":\"NODE_CHILD\",\"size\":\"50*50\",\"x\":400,\"y\":450,\"form\":{\"nodeId\":\"\",\"itemTypeList\":\"3\",\"wasehouseId\":10,\"itemId\":96,\"itemTitle\":\"测试物流商品\",\"itemType\":\"\",\"itemCode\":\"P12345679272\",\"imageUrl\":\"\",\"skuCode\":\"P12345679272001\",\"skuId\":119,\"properties\":\"\",\"propertiesName\":\"\",\"itemCategoryName\":null,\"minUnitName\":\"个\",\"unitPercent\":1,\"attritionPercent\":3,\"remark\":\"\",\"technologyId\":5},\"index\":5,\"level\":2,\"leaf\":0,\"color\":\"#1890FF\",\"id\":\"255deaa9\"},{\"type\":\"node\",\"label\":\"发啊啊\",\"shape\":\"NODE_CHILD\",\"size\":\"50*50\",\"x\":600,\"y\":450,\"form\":{\"nodeId\":\"\",\"itemTypeList\":\"3\",\"wasehouseId\":10,\"itemId\":87,\"itemTitle\":\"发啊啊\",\"itemType\":\"\",\"itemCode\":\"P12345679229\",\"imageUrl\":\"\",\"skuCode\":\"P12345679229001\",\"skuId\":107,\"properties\":\"\",\"propertiesName\":\"\",\"itemCategoryName\":null,\"minUnitName\":\"个\",\"unitPercent\":2,\"attritionPercent\":3,\"remark\":\"\",\"technologyId\":5},\"index\":7,\"level\":2,\"leaf\":0,\"color\":\"#1890FF\",\"id\":\"21501847\"}],\"edges\":[{\"source\":\"7f41ad4c\",\"sourceAnchor\":0,\"target\":\"d1a9cf3b\",\"targetAnchor\":0,\"style\":{\"stroke\":\"#45bf6c\"},\"type\":\"edge\",\"id\":\"8bc55952\",\"index\":2,\"form\":{\"label\":\"1:1\",\"unitPercent\":1,\"attritionPercent\":1},\"label\":\"1:1\"},{\"source\":\"7f41ad4c\",\"sourceAnchor\":0,\"target\":\"daccb00f\",\"targetAnchor\":0,\"style\":{\"stroke\":\"#45bf6c\"},\"type\":\"edge\",\"id\":\"c964b7d6\",\"index\":4,\"form\":{\"label\":\"3:1\",\"unitPercent\":3,\"attritionPercent\":1},\"label\":\"3:1\"},{\"source\":\"d1a9cf3b\",\"sourceAnchor\":1,\"target\":\"255deaa9\",\"targetAnchor\":0,\"style\":{\"stroke\":\"#45bf6c\"},\"type\":\"edge\",\"id\":\"00a4b209\",\"index\":6,\"form\":{\"label\":\"1:3\",\"unitPercent\":1,\"attritionPercent\":3},\"label\":\"1:3\"},{\"source\":\"d1a9cf3b\",\"sourceAnchor\":1,\"target\":\"21501847\",\"targetAnchor\":0,\"style\":{\"stroke\":\"#45bf6c\"},\"type\":\"edge\",\"id\":\"4919969f\",\"index\":8,\"form\":{\"label\":\"2:3\",\"unitPercent\":2,\"attritionPercent\":3},\"label\":\"2:3\"},{\"source\":\"daccb00f\",\"sourceAnchor\":1,\"target\":\"21501847\",\"targetAnchor\":0,\"style\":{\"stroke\":\"#45bf6c\"},\"type\":\"edge\",\"form\":{\"label\":\"2:3\",\"unitPercent\":2,\"attritionPercent\":3},\"id\":\"ca64d9d0\",\"index\":9,\"label\":\"2:3\"}]}";
+//        String content = "{\"nodes\":[{\"type\":\"node\",\"label\":\"堃堃的肾2\",\"shape\":\"NODE_ROOT\",\"size\":\"50*50\",\"x\":600,\"y\":150,\"form\":{\"itemId\":84,\"itemTitle\":\"堃堃的肾2\",\"itemType\":1,\"itemCode\":\"P12345679213\",\"imageUrl\":\"0ea22e6147ca414e895e13741e088397\",\"skuCode\":\"P12345679213001\",\"properties\":null,\"propertiesName\":\"\",\"itemCategoryName\":\"855555\",\"minUnitName\":\"个\"},\"color\":\"#c55a11\",\"index\":0,\"level\":0,\"leaf\":2,\"id\":\"7f41ad4c\"},{\"type\":\"node\",\"label\":\"测试物料\",\"shape\":\"NODE_CHILD\",\"size\":\"50*50\",\"x\":500,\"y\":300,\"form\":{\"nodeId\":\"\",\"itemTypeList\":\"3\",\"wasehouseId\":10,\"itemId\":90,\"itemTitle\":\"测试物料\",\"itemType\":\"\",\"itemCode\":\"P12345679238\",\"imageUrl\":\"\",\"skuCode\":\"P12345679238001\",\"skuId\":112,\"properties\":\"\",\"propertiesName\":\"\",\"itemCategoryName\":null,\"minUnitName\":\"个\",\"unitPercent\":1,\"attritionPercent\":1,\"remark\":\"\"},\"index\":1,\"level\":1,\"leaf\":2,\"color\":\"#1890FF\",\"id\":\"d1a9cf3b\"},{\"type\":\"node\",\"label\":\"测试得东西\",\"shape\":\"NODE_CHILD\",\"size\":\"50*50\",\"x\":700,\"y\":300,\"form\":{\"nodeId\":\"\",\"itemTypeList\":\"1,2\",\"wasehouseId\":10,\"itemId\":89,\"itemTitle\":\"测试得东西\",\"itemType\":\"\",\"itemCode\":\"P12345679233\",\"imageUrl\":\"\",\"skuCode\":\"P12345679233002\",\"skuId\":110,\"properties\":\"\",\"propertiesName\":\"sku1:2\",\"itemCategoryName\":null,\"minUnitName\":\"个\",\"unitPercent\":3,\"attritionPercent\":1,\"remark\":\"\",\"technologyId\":5},\"index\":3,\"level\":1,\"leaf\":1,\"color\":\"#1890FF\",\"id\":\"daccb00f\"},{\"type\":\"node\",\"label\":\"测试物流商品\",\"shape\":\"NODE_CHILD\",\"size\":\"50*50\",\"x\":400,\"y\":450,\"form\":{\"nodeId\":\"\",\"itemTypeList\":\"3\",\"wasehouseId\":10,\"itemId\":96,\"itemTitle\":\"测试物流商品\",\"itemType\":\"\",\"itemCode\":\"P12345679272\",\"imageUrl\":\"\",\"skuCode\":\"P12345679272001\",\"skuId\":119,\"properties\":\"\",\"propertiesName\":\"\",\"itemCategoryName\":null,\"minUnitName\":\"个\",\"unitPercent\":1,\"attritionPercent\":3,\"remark\":\"\",\"technologyId\":5},\"index\":5,\"level\":2,\"leaf\":0,\"color\":\"#1890FF\",\"id\":\"255deaa9\"},{\"type\":\"node\",\"label\":\"发啊啊\",\"shape\":\"NODE_CHILD\",\"size\":\"50*50\",\"x\":600,\"y\":450,\"form\":{\"nodeId\":\"\",\"itemTypeList\":\"3\",\"wasehouseId\":10,\"itemId\":87,\"itemTitle\":\"发啊啊\",\"itemType\":\"\",\"itemCode\":\"P12345679229\",\"imageUrl\":\"\",\"skuCode\":\"P12345679229001\",\"skuId\":107,\"properties\":\"\",\"propertiesName\":\"\",\"itemCategoryName\":null,\"minUnitName\":\"个\",\"unitPercent\":2,\"attritionPercent\":3,\"remark\":\"\",\"technologyId\":5},\"index\":7,\"level\":2,\"leaf\":0,\"color\":\"#1890FF\",\"id\":\"21501847\"}],\"edges\":[{\"source\":\"7f41ad4c\",\"sourceAnchor\":0,\"target\":\"d1a9cf3b\",\"targetAnchor\":0,\"style\":{\"stroke\":\"#45bf6c\"},\"type\":\"edge\",\"id\":\"8bc55952\",\"index\":2,\"form\":{\"label\":\"1:1\",\"unitPercent\":1,\"attritionPercent\":1},\"label\":\"1:1\"},{\"source\":\"7f41ad4c\",\"sourceAnchor\":0,\"target\":\"daccb00f\",\"targetAnchor\":0,\"style\":{\"stroke\":\"#45bf6c\"},\"type\":\"edge\",\"id\":\"c964b7d6\",\"index\":4,\"form\":{\"label\":\"3:1\",\"unitPercent\":3,\"attritionPercent\":1},\"label\":\"3:1\"},{\"source\":\"d1a9cf3b\",\"sourceAnchor\":1,\"target\":\"255deaa9\",\"targetAnchor\":0,\"style\":{\"stroke\":\"#45bf6c\"},\"type\":\"edge\",\"id\":\"00a4b209\",\"index\":6,\"form\":{\"label\":\"1:3\",\"unitPercent\":1,\"attritionPercent\":3},\"label\":\"1:3\"},{\"source\":\"d1a9cf3b\",\"sourceAnchor\":1,\"target\":\"21501847\",\"targetAnchor\":0,\"style\":{\"stroke\":\"#45bf6c\"},\"type\":\"edge\",\"id\":\"4919969f\",\"index\":8,\"form\":{\"label\":\"2:3\",\"unitPercent\":2,\"attritionPercent\":3},\"label\":\"2:3\"},{\"source\":\"daccb00f\",\"sourceAnchor\":1,\"target\":\"21501847\",\"targetAnchor\":0,\"style\":{\"stroke\":\"#45bf6c\"},\"type\":\"edge\",\"form\":{\"label\":\"2:3\",\"unitPercent\":2,\"attritionPercent\":3},\"id\":\"ca64d9d0\",\"index\":9,\"label\":\"2:3\"}]}";
+//
+//        List<Item> itemList = new ArrayList<>();
+//
+//        Item item = new Item();
+//        item.setBomNodeId("7f41ad4c");
+//        item.setProductTotal(10);
+//
+//        itemList.add(item);
+//
+//        BomService bomService = new BomService();
+//
+//
+//        Map<String, BigDecimal> bomMap = bomService.countEveryNodeNumber(content, itemList);
 
-        List<Item> itemList = new ArrayList<>();
+//        List<Integer> a = new ArrayList<>(10);
+//        for (int i = 0; i < 10; i++) {
+//            a.add(i);
+//        }
+//        System.out.println(a.size());
+//
+//        for (int i = 0; i < a.size(); i++) {
+//            if (a.get(i) % 2 == 0) {
+//                a.remove(i);
+//            }
+//        }
+////        for (Integer e : a) {
+////            System.out.println(e % 2);
+////            if ((e % 2) == 0) {
+////                System.out.println(e);
+////                a.remove(e);
+////            }
+////        }
+//
+//        System.out.println(a);
 
-        Item item = new Item();
-        item.setBomNodeId("7f41ad4c");
-        item.setProductTotal(10);
+        long convert = TimeUnit.MILLISECONDS.convert(1, TimeUnit.SECONDS);
+        System.out.println(convert);
 
-        itemList.add(item);
+        long l = TimeUnit.SECONDS.toMillis(1);
+        System.out.println(l);
 
-        BomService bomService = new BomService();
-
-
-        Map<String, BigDecimal> bomMap = bomService.countEveryNodeNumber(content, itemList);
-
-        System.out.println(JSON.toJSON(bomMap));
     }
 
     public static class BomService {
