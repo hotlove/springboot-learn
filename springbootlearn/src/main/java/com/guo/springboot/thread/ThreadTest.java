@@ -28,6 +28,20 @@ public class ThreadTest {
             }, 5, TimeUnit.MINUTES);
         }
 
+        Future<?> test = monitorThreadPoolExecutor.submit(() -> {
+            System.out.println("test");
+        });
+
+        try {
+            test.get(1L, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+            test.cancel(true);
+        }
 
 
 //        new Thread(() -> {
