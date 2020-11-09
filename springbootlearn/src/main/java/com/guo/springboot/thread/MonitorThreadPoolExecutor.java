@@ -131,7 +131,7 @@ public class MonitorThreadPoolExecutor extends ThreadPoolExecutor {
             long sartTaskTime = System.currentTimeMillis();
             this.task.run();
             long currentTime = System.currentTimeMillis();
-            if ((currentTime - sartTaskTime) < this.timeUnit.toMillis(this.timeout)) {
+            if ((currentTime - sartTaskTime) <= this.timeUnit.toMillis(this.timeout)) {
                 this.releaseThread = true;
             }
         }
