@@ -9,10 +9,10 @@ import java.util.concurrent.*;
  */
 public class ThreadTest {
     public static void main(String[] args) {
-        MonitorThreadPoolExecutor monitorThreadPoolExecutor =
-                new MonitorThreadPoolExecutor(2, 2, 0,
+        ThreadMonitorPoolExecutor monitorThreadPoolExecutor =
+                new ThreadMonitorPoolExecutor(2, 2, 0,
                         TimeUnit.SECONDS,
-                        new LinkedBlockingDeque<>(8));
+                        new LinkedBlockingDeque<>(8), 1L, TimeUnit.MINUTES);
 
         for (int i = 0; i < 5; i++) {
             monitorThreadPoolExecutor.execute(() -> {
@@ -20,29 +20,29 @@ public class ThreadTest {
                 try {
 //                    System.out.println("任务开始执行------");
                     System.out.println("线程:"+Thread.currentThread().getName()+"执行了超时任务");
-                    TimeUnit.SECONDS.sleep(3);
+                    TimeUnit.MINUTES.sleep(7);
                 } catch (InterruptedException e) {
 //                    e.printStackTrace();
                     System.out.println("线程:"+Thread.currentThread().getName()+"任务中断"+(System.currentTimeMillis() - sartTime));
                 }
-            }, 2, TimeUnit.SECONDS);
+            }, 5, TimeUnit.MINUTES);
         }
 
 
 
-        new Thread(() -> {
-            while (true) {
-                monitorThreadPoolExecutor.execute(() -> {
-                    System.out.println("线程:"+Thread.currentThread().getName()+"执行了任务");
-                });
-                try {
-                    TimeUnit.MILLISECONDS.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }).start();
+//        new Thread(() -> {
+//            while (true) {
+//                monitorThreadPoolExecutor.execute(() -> {
+//                    System.out.println("线程:"+Thread.currentThread().getName()+"执行了任务");
+//                });
+//                try {
+//                    TimeUnit.MILLISECONDS.sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//        }).start();
 
 //        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(2, 2, 0,
 //                TimeUnit.SECONDS,
