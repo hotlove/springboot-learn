@@ -88,13 +88,18 @@ public class ThreadTest {
 //                future.cancel(true);
 //            }
 //        }
-        for (int i = 0; i < 10; i++) {
-            int finalI = i;
-            new Thread(() -> {
-                msg(finalI);
-            }).start();
+//        for (int i = 0; i < 10; i++) {
+//            int finalI = i;
+//            new Thread(() -> {
+//                msg(finalI);
+//            }).start();
+//
+//        }
 
-        }
+//        int i = 0 & 0;
+//        System.out.println(i);
+        String s = "1202_14010_4294967295_20201016074002@callenabler245qh.huaweicaas.com";
+        System.out.println(s.length());
     }
 
     public static void msg(Integer integer) {
