@@ -2,6 +2,7 @@ package com.guo.springboot.kafka;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Properties;
 
@@ -12,14 +13,14 @@ import java.util.Properties;
  * @Description:
  */
 public class ProducerFastStart {
-    public static final String brokerList = "192.168.20.52:9092";
+    public static final String brokerList = "192.168.20.52:9092,192.168.20.52:9093,192.168.20.52:9094";
     public static final String topic = "topic-demo";
     public static void main(String[] args) {
         Properties properties = new Properties();
-        properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+//        properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+//        properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         properties.put("bootstrap.servers", brokerList);
-        KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
+        KafkaProducer<String, String> producer = new KafkaProducer<>(properties, new StringSerializer(), new StringSerializer());
         ProducerRecord<String, String> record = new ProducerRecord<>(topic, "hello, Kafka!");
         try {
             producer.send(record);

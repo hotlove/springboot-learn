@@ -17,7 +17,7 @@ import java.util.Properties;
  */
 public class ConsumerFastStart {
 
-    public static final String brokerList = "192.168.20.52:9092";
+    public static final String brokerList = "192.168.20.52:9092,192.168.20.52:9093,192.168.20.52:9094";
     public static final String topic = "topic-demo";
     public static final String groupId = "group.demo";
 
