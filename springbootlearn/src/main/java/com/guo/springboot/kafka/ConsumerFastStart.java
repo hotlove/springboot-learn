@@ -8,6 +8,7 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Date: 2020/12/28 16:51
@@ -16,8 +17,8 @@ import java.util.Properties;
  * @Description:
  */
 public class ConsumerFastStart {
-
-    public static final String brokerList = "192.168.20.52:9092,192.168.20.52:9093,192.168.20.52:9094";
+        public static final String brokerList = "192.168.20.52:9092,192.168.20.52:9093,192.168.20.52:9094";
+//    public static final String brokerList = "192.168.20.52:9092";
     public static final String topic = "topic-demo";
     public static final String groupId = "group.demo";
 
@@ -35,8 +36,13 @@ public class ConsumerFastStart {
         //循环消费消息
         while (true) {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             for (ConsumerRecord<String, String> record : records) {
-                System.out.println(record.value());
+                System.out.println("消息："+record.value());
             }
         }
     }
