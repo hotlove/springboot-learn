@@ -1,11 +1,14 @@
 package com.guo.springboot.kafka;
 
+import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
 import java.time.Duration;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -32,7 +35,17 @@ public class ConsumerFastStart {
         //创建⼀个消费者客户端实例
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties, new StringDeserializer(), new StringDeserializer());
         //订阅主题
-        consumer.subscribe(Collections.singletonList(topic));
+        consumer.subscribe(Collections.singletonList(topic), new ConsumerRebalanceListener() {
+            @Override
+            public void onPartitionsRevoked(Collection<TopicPartition> partitions) {
+
+            }
+
+            @Override
+            public void onPartitionsAssigned(Collection<TopicPartition> partitions) {
+
+            }
+        });
         //循环消费消息
         while (true) {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
@@ -43,6 +56,7 @@ public class ConsumerFastStart {
             }
             for (ConsumerRecord<String, String> record : records) {
                 System.out.println("消息："+record.value());
+                System.out.println("topic："+record.topic());
             }
         }
     }
