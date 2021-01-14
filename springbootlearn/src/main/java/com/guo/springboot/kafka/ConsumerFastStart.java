@@ -1,9 +1,6 @@
 package com.guo.springboot.kafka;
 
-import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
@@ -32,8 +29,10 @@ public class ConsumerFastStart {
         properties.put("bootstrap.servers", brokerList);
         //设置消费组的名称，具体的释义可以参⻅第3章
         properties.put("group.id", groupId);
+        properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         //创建⼀个消费者客户端实例
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties, new StringDeserializer(), new StringDeserializer());
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
         //订阅主题
         consumer.subscribe(Collections.singletonList(topic), new ConsumerRebalanceListener() {
             @Override
