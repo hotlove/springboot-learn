@@ -34,17 +34,19 @@ public class ConsumerFastStart {
         //创建⼀个消费者客户端实例
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
         //订阅主题
-        consumer.subscribe(Collections.singletonList(topic), new ConsumerRebalanceListener() {
-            @Override
-            public void onPartitionsRevoked(Collection<TopicPartition> partitions) {
-
-            }
-
-            @Override
-            public void onPartitionsAssigned(Collection<TopicPartition> partitions) {
-
-            }
-        });
+        consumer.subscribe(Collections.singletonList(topic)
+//                , new ConsumerRebalanceListener() {
+//            @Override
+//            public void onPartitionsRevoked(Collection<TopicPartition> partitions) {
+//
+//            }
+//
+//            @Override
+//            public void onPartitionsAssigned(Collection<TopicPartition> partitions) {
+//
+//            }
+//        }
+        );
         //循环消费消息
         while (true) {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
