@@ -34,7 +34,7 @@ public class ProducerAllFastStart {
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer<String, String>(props);
 
         // 消息记录
-        ProducerRecord<String, String> record = new ProducerRecord<>(topic, "hello,workd");
+        ProducerRecord<String, String> record = new ProducerRecord<>(topic, "hello,workdxxx");
 
         try {
             kafkaProducer.send(record);
