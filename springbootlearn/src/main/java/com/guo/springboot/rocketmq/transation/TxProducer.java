@@ -1,4 +1,4 @@
-package com.guo.springboot.mq.rocketmq.transation;
+package com.guo.springboot.rocketmq.transation;
 
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.LocalTransactionState;

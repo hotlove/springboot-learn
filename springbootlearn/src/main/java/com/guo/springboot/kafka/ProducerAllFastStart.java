@@ -26,9 +26,9 @@ public class ProducerAllFastStart {
         // 自定义拦截器
         props.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, ProducerInterceptorPrefix.class.getName());
         // 自定义value序列化器
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, com.guo.springboot.kafka.StringSerializer.class.getName());
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSelfSerializer.class.getName());
         // 自定义分区器
-        props.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, DemoPartitioner.class.getName());
+//        props.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, DemoPartitioner.class.getName());
 
         // kafka生产者客户端
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer<String, String>(props);

@@ -12,7 +12,7 @@ import java.util.Map;
  * @Since JDK 1.8
  * @Description:
  */
-public class StringSerializer implements Serializer<String> {
+public class StringSelfSerializer implements Serializer<String> {
     /**
      * 自定义序列化器使用就是
      * 只需将 KafkaProducer 的 value.serializer 参数设置为 StringSerializer 类的全限定名即可

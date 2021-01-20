@@ -1,4 +1,4 @@
-package com.guo.springboot.mq.rocketmq.order;
+package com.guo.springboot.rocketmq.order;
 
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;

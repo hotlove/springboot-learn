@@ -1,4 +1,4 @@
-package com.guo.springboot.mq.rocketmq.broadcast;
+package com.guo.springboot.rocketmq.broadcast;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;

@@ -1,7 +1,9 @@
-package com.guo.springboot.mq.rocketmq.order;
+package com.guo.springboot.rocketmq.transation;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
-import org.apache.rocketmq.client.consumer.listener.*;
+import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
+import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
+import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
@@ -9,13 +11,13 @@ import org.apache.rocketmq.remoting.common.RemotingHelper;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-public class OrderConsumer {
-
+/**
+ * @Auther: hotlove_linx
+ * @Date: 2020/7/28 22:58
+ * @Description:
+ */
+public class TxConsumer {
     public static void main(String[] args) throws MQClientException {
-        startConsumer1();
-    }
-
-    public static void startConsumer1() throws MQClientException {
         // 1.创建defaultmqpushconsumer
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("demo_consumer_group");
 
@@ -27,14 +29,15 @@ public class OrderConsumer {
 
         // 3.设置subscribe,这里是要读取的主题信息
         consumer.subscribe(
-                "Topic_Order_Demo",  // 制定消费主题
+                "Topic_Tx_Demo",  // 制定消费主题
                 "*"// 过滤规则 比如Tags || TagA || TagB
         );
 
         // 4.创建消息监听
-        consumer.registerMessageListener(new MessageListenerOrderly() {
+        consumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override
-            public ConsumeOrderlyStatus consumeMessage(List<MessageExt> list, ConsumeOrderlyContext consumeOrderlyContext) {
+            public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext consumeConcurrentlyContext) {
+                System.out.println("开始消费");
                 // 5.消费消息
                 for (MessageExt messageExt : list) {
                     // 获取主题
@@ -49,12 +52,12 @@ public class OrderConsumer {
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                         // 消息重试
-                        return ConsumeOrderlyStatus.SUSPEND_CURRENT_QUEUE_A_MOMENT;
+                        return ConsumeConcurrentlyStatus.RECONSUME_LATER;
                     }
                 }
                 // 6.返回状态
                 // 消费消息完成
-                return ConsumeOrderlyStatus.SUCCESS;
+                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
         });
 

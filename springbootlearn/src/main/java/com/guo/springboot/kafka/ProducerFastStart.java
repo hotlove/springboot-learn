@@ -2,7 +2,6 @@ package com.guo.springboot.kafka;
 
 import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.serialization.StringSerializer;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 
 import java.util.Properties;
 
