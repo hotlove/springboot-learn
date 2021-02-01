@@ -1,5 +1,8 @@
 package com.guo.springboot;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * @Date: 2020/12/18 11:25
  * @Author 郭乐建
@@ -11,9 +14,14 @@ public class JVMParmTest {
 
     public static void main(String[] args) {
 //        testBigObject();
-        for (; ; ) {
-            getGarlic();
-        }
+//        for (; ; ) {
+//            getGarlic();
+//        }
+        Float fa = new Float(100);
+        int num = (int) Math.ceil(50 * 3 / fa);
+        float a = 50*3/fa;
+        System.out.println(a);
+        System.out.println(num);
     }
 
     public static void getGarlic() {

@@ -53,11 +53,33 @@ public class JSONTset {
 //
 //        System.out.println(a);
 
-        long convert = TimeUnit.MILLISECONDS.convert(1, TimeUnit.SECONDS);
-        System.out.println(convert);
+//        long convert = TimeUnit.MILLISECONDS.convert(1, TimeUnit.SECONDS);
+//        System.out.println(convert);
+//
+//        long l = TimeUnit.SECONDS.toMillis(1);
+//        System.out.println(l);
 
-        long l = TimeUnit.SECONDS.toMillis(1);
-        System.out.println(l);
+        int a=0;
+
+        while(a<5){
+
+            switch(a){
+
+                case 0:
+
+                case 3:a=a+2;
+
+                case 1:
+
+                case 2:a=a+3;
+
+                default:a=a+5;
+
+            }
+
+            System.out.println(a);
+
+        }
 
     }
 
