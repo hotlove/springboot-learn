@@ -1,5 +1,8 @@
 package com.guo.springboot.monitor;
 
+import java.util.Arrays;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
@@ -33,5 +36,9 @@ public class Test {
                 System.out.println("任务被中断2"+Thread.currentThread().getName());
             }
         }, 3, TimeUnit.SECONDS);
+
+        Future<?> submit = threadPoolExecutor.submit(() -> {
+
+        });
     }
 }
