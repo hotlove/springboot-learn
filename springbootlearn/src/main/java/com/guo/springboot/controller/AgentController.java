@@ -1,9 +1,8 @@
 package com.guo.springboot.controller;
 
+import com.guo.springboot.domain.Profile;
 import com.guo.springboot.service.TestService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,9 +21,9 @@ public class AgentController {
 
     @GetMapping("/testi")
     @ResponseBody
-    public String test() {
+    public String test() throws InterruptedException {
         System.out.println("test controller");
-        String returnWorld = testService.getReturnWorld();
-        return returnWorld;
+        Profile returnWorld = testService.getReturnWorld();
+        return returnWorld.getUsername();
     }
 }

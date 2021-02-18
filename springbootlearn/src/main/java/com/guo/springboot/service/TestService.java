@@ -1,8 +1,11 @@
 package com.guo.springboot.service;
 
+
+import com.guo.springboot.domain.Profile;
+
 public interface TestService {
 
-    String getReturnWorld();
+    Profile getReturnWorld() throws InterruptedException;
 
     void helloword();
 

@@ -5,11 +5,11 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class TimeAspect {
 
-    @Around("execution(* com.guo.springboot.service.*..*(..))")
+//    @Around("execution(* com.guo.springboot.service.*..*(..))")
     public Object method(ProceedingJoinPoint pjp) throws Throwable {
 
         System.out.println("=====Aspect处理=======");
