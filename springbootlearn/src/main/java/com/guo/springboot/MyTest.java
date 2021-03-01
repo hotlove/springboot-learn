@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.SimpleFormatter;
 import java.util.stream.Collectors;
 
@@ -55,6 +56,8 @@ public class MyTest {
     }
 
     public static void getLocalIP2() {
+        ReentrantLock lock = new ReentrantLock();
+        lock.lock();
         try {
             Enumeration<NetworkInterface> faces = NetworkInterface.getNetworkInterfaces();
             while (faces.hasMoreElements()) { // 遍历网络接口
