@@ -1,15 +1,6 @@
 package com.guo.springboot;
 
-import com.guo.springboot.dao.ProfileMapper;
-import com.guo.springboot.domain.Profile;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.apache.ibatis.session.defaults.DefaultSqlSessionFactory;
-
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
 
