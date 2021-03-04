@@ -5,6 +5,9 @@ import io.jsonwebtoken.lang.Strings;
 import org.junit.Test;
 
 import javax.xml.bind.SchemaOutputResolver;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -154,13 +157,30 @@ public class MyTest {
         }
     }
 
-        public static void main(String[] args) throws UnknownHostException {
-            A a = new A();
-            a.setId(null);
+        public static void main(String[] args) throws IOException {
 
-            B b = null;
-            b.setId(a.getId());
-//            getLocalIP2();
+        String urlStr = "http://tcc.taobao.com/cc/json/mobile_tel_segment.htm?tel=13905607377";
+        URL url = new URL(urlStr);
+            URLConnection urlConnection = url.openConnection();
+            //设置连接属性
+            urlConnection.setConnectTimeout(6*1000);
+            //获得输入流，并封装为字符
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(urlConnection.getInputStream()));//获得网络返回的输入流
+            String line;
+            String result=null;
+            while ((line = in.readLine()) != null) {
+                result += "/n" + line;
+            }
+            result=new String(result.getBytes(),"UTF-8");
+            System.out.println("result"+result);
+
+//            A a = new A();
+//            a.setId(null);
+//
+//            B b = null;
+//            b.setId(a.getId());
+////            getLocalIP2();
 //            Calendar todayCalendar = Calendar.getInstance();
 //            todayCalendar.set(Calendar.HOUR_OF_DAY, 0);
 //            todayCalendar.set(Calendar.MINUTE, 0);
