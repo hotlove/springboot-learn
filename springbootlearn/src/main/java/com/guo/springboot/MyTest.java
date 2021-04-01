@@ -158,22 +158,24 @@ public class MyTest {
     }
 
         public static void main(String[] args) throws IOException {
-
-        String urlStr = "http://tcc.taobao.com/cc/json/mobile_tel_segment.htm?tel=13905607377";
-        URL url = new URL(urlStr);
-            URLConnection urlConnection = url.openConnection();
-            //设置连接属性
-            urlConnection.setConnectTimeout(6*1000);
-            //获得输入流，并封装为字符
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(urlConnection.getInputStream()));//获得网络返回的输入流
-            String line;
-            String result=null;
-            while ((line = in.readLine()) != null) {
-                result += "/n" + line;
-            }
-            result=new String(result.getBytes(),"UTF-8");
-            System.out.println("result"+result);
+            int num = (int) Math.ceil(10 * 1 / 1000.0);
+            System.out.println(num);
+// 查询号码归属地
+//        String urlStr = "http://tcc.taobao.com/cc/json/mobile_tel_segment.htm?tel=13905607377";
+//        URL url = new URL(urlStr);
+//            URLConnection urlConnection = url.openConnection();
+//            //设置连接属性
+//            urlConnection.setConnectTimeout(6*1000);
+//            //获得输入流，并封装为字符
+//            BufferedReader in = new BufferedReader(
+//                    new InputStreamReader(urlConnection.getInputStream()));//获得网络返回的输入流
+//            String line;
+//            String result=null;
+//            while ((line = in.readLine()) != null) {
+//                result += "/n" + line;
+//            }
+//            result=new String(result.getBytes(),"UTF-8");
+//            System.out.println("result"+result);
 
 //            A a = new A();
 //            a.setId(null);
@@ -330,6 +332,10 @@ public class MyTest {
 //            System.out.println(JSON.toJSONString(e));
 //        });
 
+            Byte a1 = new Byte((byte) 2);
+            Integer a2 = new Integer(2);
+
+            System.out.println(a1.intValue() >= a2.intValue());
 
     }
 
