@@ -14,11 +14,11 @@ public class TestController {
     private TestService testService;
 
     @GetMapping("/hello")
-    public String helloWrold() {
+    public String helloWrold() throws InterruptedException {
 
         System.out.println("current Thread:" + Thread.currentThread().getName());
 
-        return testService.getReturnWorld();
+        return testService.getReturnWorld().getUsername();
     }
 
     @GetMapping("/hello2")

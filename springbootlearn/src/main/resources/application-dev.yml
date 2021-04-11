@@ -8,7 +8,7 @@ spring:
     prefix: classpath:/templates/
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.0.51:3306/spring-boot?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    url: jdbc:mysql://192.168.20.51:3306/spring-boot?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     username: root
     password: 123456
 

@@ -11,12 +11,15 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.xssf.usermodel.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.concurrent.TimeUnit;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -32,6 +35,20 @@ public class IndexController {
 
     @Resource
     private DownloadService downloadService;
+
+    @RequestMapping(value = "/sleephaha.do", method = RequestMethod.GET)
+    @ResponseBody
+    public String sleepSys(HttpServletRequest request) {
+
+        try {
+            System.out.println("开始请求。。。");
+            TimeUnit.SECONDS.sleep(300);
+            System.out.println("jieshu。。。");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "睡了120";
+    }
 
     @RequestMapping(value = "/login")
     public ModelAndView index() {

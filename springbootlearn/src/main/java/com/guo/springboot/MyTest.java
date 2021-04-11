@@ -4,9 +4,17 @@ import com.alibaba.fastjson.JSON;
 import io.jsonwebtoken.lang.Strings;
 import org.junit.Test;
 
+import javax.xml.bind.SchemaOutputResolver;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.logging.SimpleFormatter;
 import java.util.stream.Collectors;
 
 
@@ -50,13 +58,153 @@ public class MyTest {
         return true;
     }
 
-    public static void main(String[] args) {
-        List<String> strList = new ArrayList<>();
-        strList.add("");
-        strList.add("2");
-        strList.add("3");
+    public static void getLocalIP2() {
+        ReentrantLock lock = new ReentrantLock();
+        lock.lock();
+        try {
+            Enumeration<NetworkInterface> faces = NetworkInterface.getNetworkInterfaces();
+            while (faces.hasMoreElements()) { // 遍历网络接口
+                NetworkInterface face = faces.nextElement();
+                if (face.isLoopback() || face.isVirtual() || !face.isUp()) {
+                    continue;
+                }
+                System.out.print("网络接口名：" + face.getDisplayName() + "，地址：");
+                Enumeration<InetAddress> address = face.getInetAddresses();
+                while (address.hasMoreElements()) { // 遍历网络地址
+                    InetAddress addr = address.nextElement();
+                    if (!addr.isLoopbackAddress() && addr.isSiteLocalAddress() && !addr.isAnyLocalAddress()) {
+                        System.out.println(addr.getHostAddress());
+                    }
+                }
+                System.out.println("");
+            }
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+    }
 
-        System.out.println(String.join(",", strList));
+
+    public static String getLocalIpAddr() {
+
+        String clientIP = null;
+        Enumeration<NetworkInterface> networks = null;
+        try {
+            //获取所有网卡设备
+            networks = NetworkInterface.getNetworkInterfaces();
+            if (networks == null) {
+                //没有网卡设备 打印日志  返回null结束
+//                logger.info("networks  is null");
+                return null;
+            }
+        } catch (SocketException e) {
+            System.out.println(e.getMessage());
+        }
+        InetAddress ip;
+        Enumeration<InetAddress> addrs;
+        // 遍历网卡设备
+        while (networks.hasMoreElements()) {
+            NetworkInterface ni = networks.nextElement();
+            try {
+                //过滤掉 loopback设备、虚拟网卡
+                if (!ni.isUp() || ni.isLoopback() || ni.isVirtual()) {
+                    continue;
+                }
+            } catch (SocketException e) {
+//                logger.info(e.getMessage());
+            }
+            addrs = ni.getInetAddresses();
+            if (addrs == null) {
+//                logger.info("InetAddress is null");
+                continue;
+            }
+            // 遍历InetAddress信息
+            while (addrs.hasMoreElements()) {
+                ip = addrs.nextElement();
+                if (!ip.isLoopbackAddress() && ip.isSiteLocalAddress() && ip.getHostAddress().indexOf(":") == -1) {
+                    try {
+                        clientIP = ip.toString().split("/")[1];
+                        System.out.println("name"+ ni.getDisplayName() + "ip" + clientIP);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        clientIP = null;
+                    }
+                }
+            }
+        }
+        return clientIP;
+    }
+
+    public static class A {
+        private Long id;
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+    }
+
+    public static class B {
+        private Long id;
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+    }
+
+        public static void main(String[] args) throws IOException {
+            int num = (int) Math.ceil(10 * 1 / 1000.0);
+            System.out.println(num);
+// 查询号码归属地
+//        String urlStr = "http://tcc.taobao.com/cc/json/mobile_tel_segment.htm?tel=13905607377";
+//        URL url = new URL(urlStr);
+//            URLConnection urlConnection = url.openConnection();
+//            //设置连接属性
+//            urlConnection.setConnectTimeout(6*1000);
+//            //获得输入流，并封装为字符
+//            BufferedReader in = new BufferedReader(
+//                    new InputStreamReader(urlConnection.getInputStream()));//获得网络返回的输入流
+//            String line;
+//            String result=null;
+//            while ((line = in.readLine()) != null) {
+//                result += "/n" + line;
+//            }
+//            result=new String(result.getBytes(),"UTF-8");
+//            System.out.println("result"+result);
+
+//            A a = new A();
+//            a.setId(null);
+//
+//            B b = null;
+//            b.setId(a.getId());
+////            getLocalIP2();
+//            Calendar todayCalendar = Calendar.getInstance();
+//            todayCalendar.set(Calendar.HOUR_OF_DAY, 0);
+//            todayCalendar.set(Calendar.MINUTE, 0);
+//            todayCalendar.set(Calendar.SECOND, 0);
+//            todayCalendar.set(Calendar.MILLISECOND, 0);
+//            Date todayDate = todayCalendar.getTime();
+//            System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(todayDate));
+//
+//            Calendar todayCalendar2 = Calendar.getInstance();
+//            todayCalendar2.setTime(todayDate);
+//            todayCalendar2.set(Calendar.HOUR_OF_DAY, 0);
+//            todayCalendar2.set(Calendar.MINUTE, 0);
+//            todayCalendar2.set(Calendar.SECOND, 0);
+//            todayCalendar2.set(Calendar.MILLISECOND, 0);
+//            Date da = todayCalendar.getTime();
+//            System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(da));
+//        List<String> strList = new ArrayList<>();
+//        strList.add("");
+//        strList.add("2");
+//        strList.add("3");
+//
+//        System.out.println(String.join(",", strList));
 //        Integer a = new Integer(123);
 //        int b = 123;
 //
@@ -184,6 +332,10 @@ public class MyTest {
 //            System.out.println(JSON.toJSONString(e));
 //        });
 
+            Byte a1 = new Byte((byte) 2);
+            Integer a2 = new Integer(2);
+
+            System.out.println(a1.intValue() >= a2.intValue());
 
     }
 
