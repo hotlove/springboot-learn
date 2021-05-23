@@ -1,4 +1,4 @@
-package com.guo.springboot.design;
+package com.guo.springboot.design.proxy;
 
 import java.lang.reflect.Proxy;
 
